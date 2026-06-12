@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Card Games Rules — How to Play, Win, and Have Fun</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Karla:ital,wght@0,400;0,500;0,700;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --felt:#0d372b;
+  --felt-deep:#092a21;
+  --stock:#faf6ec;
+  --stock-dim:#f1ead9;
+  --ink:#1d1a16;
+  --ink-soft:#5a544a;
+  --suit-red:#bd3326;
+  --brass:#c79a4b;
+  --brass-soft:#e3cb98;
+  --line:#d8cdb4;
+  --radius:14px;
+  --display:'Young Serif',Georgia,serif;
+  --body:'Karla',system-ui,sans-serif;
+  --mono:'Spline Sans Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+body{
+  font-family:var(--body);
+  background:
+    radial-gradient(1200px 600px at 50% -10%, #145341 0%, transparent 60%),
+    var(--felt);
+  color:var(--ink);
+  line-height:1.6;
+}
+a{color:inherit}
+::selection{background:var(--brass-soft)}
+
+/* ---------- Hero ---------- */
+.hero{
+  max-width:1080px;margin:0 auto;
+  padding:72px 24px 48px;
+  text-align:center;color:var(--stock);
+}
+.hero .pips{
+  font-size:1.5rem;letter-spacing:.9em;margin-left:.9em;
+  color:var(--brass-soft);
+}
+.hero .pips .r{color:#e8857a}
+.hero h1{
+  font-family:var(--display);
+  font-size:clamp(2.6rem,6.5vw,4.6rem);
+  line-height:1.05;margin:18px 0 14px;
+  text-shadow:0 2px 0 rgba(0,0,0,.35);
+}
+.hero p.tag{
+  font-size:1.1rem;max-width:46ch;margin:0 auto;
+  color:#cfe3d8;
+}
+.hero .meta{
+  display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px;
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;
+}
+.hero .meta span{
+  border:1px solid rgba(227,203,152,.45);border-radius:999px;
+  padding:5px 14px;color:var(--brass-soft);
+}
+
+/* ---------- Card index (signature) ---------- */
+.deck-nav{max-width:1080px;margin:0 auto;padding:0 24px 64px}
+.deck-nav h2{
+  font-family:var(--mono);font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--brass-soft);text-align:center;margin-bottom:22px;
+}
+.cards{
+  display:grid;gap:18px;
+  grid-template-columns:repeat(auto-fill,minmax(168px,1fr));
+}
+.gcard{
+  background:var(--stock);
+  border-radius:12px;
+  aspect-ratio:5/7;
+  padding:12px;
+  position:relative;
+  text-decoration:none;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  box-shadow:0 1px 0 rgba(0,0,0,.25), 0 10px 22px rgba(0,0,0,.30);
+  border:1px solid #fff;
+  outline-offset:3px;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.gcard:hover,.gcard:focus-visible{
+  transform:translateY(-6px) rotate(-1deg);
+  box-shadow:0 1px 0 rgba(0,0,0,.25), 0 18px 30px rgba(0,0,0,.38);
+}
+.gcard .corner{
+  position:absolute;font-family:var(--mono);font-weight:600;font-size:.8rem;line-height:1.15;
+  text-align:center;color:var(--ink);
+}
+.gcard .corner.tl{top:10px;left:10px}
+.gcard .corner.br{bottom:10px;right:10px;transform:rotate(180deg)}
+.gcard.red .corner{color:var(--suit-red)}
+.gcard .emoji{font-size:2.6rem;margin-bottom:8px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.15))}
+.gcard .name{
+  font-family:var(--display);font-size:1.06rem;text-align:center;line-height:1.2;
+}
+.gcard .type{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-soft);margin-top:6px;
+}
+.gcard .diff{margin-top:8px;font-size:.75rem;letter-spacing:.2em;color:var(--brass)}
+
+/* ---------- Main sheet ---------- */
+main{
+  max-width:1080px;margin:0 auto;padding:0 24px 90px;
+}
+section.game,.flatcard{
+  background:var(--stock);
+  border-radius:var(--radius);
+  border:1px solid #fff;
+  box-shadow:0 1px 0 rgba(0,0,0,.25), 0 14px 30px rgba(0,0,0,.30);
+  padding:clamp(26px,5vw,52px);
+  margin-bottom:38px;
+  position:relative;
+  scroll-margin-top:24px;
+}
+section.game::before,section.game::after{
+  font-family:var(--mono);font-weight:600;font-size:.95rem;line-height:1.1;
+  position:absolute;white-space:pre;color:var(--ink);
+}
+section.game::before{content:attr(data-pip);top:16px;left:18px}
+section.game::after{content:attr(data-pip);bottom:16px;right:18px;transform:rotate(180deg)}
+section.game.red::before,section.game.red::after{color:var(--suit-red)}
+
+.gamehead{text-align:center;margin-bottom:8px}
+.gamehead .emoji{font-size:2.4rem}
+.gamehead h2{
+  font-family:var(--display);
+  font-size:clamp(1.9rem,4vw,2.7rem);
+  margin:6px 0 10px;
+}
+.gamehead p.lede{
+  max-width:54ch;margin:0 auto;color:var(--ink-soft);font-size:1.05rem;
+}
+.facts{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:0;
+  margin:24px auto 30px;border:1px solid var(--line);border-radius:10px;
+  overflow:hidden;max-width:640px;background:var(--stock-dim);
+}
+.facts div{
+  flex:1 1 130px;padding:10px 14px;text-align:center;
+  border-right:1px solid var(--line);
+}
+.facts div:last-child{border-right:none}
+.facts .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft)}
+.facts .v{font-weight:700;font-size:.95rem;margin-top:2px}
+
+.goal{
+  text-align:center;font-family:var(--display);font-size:1.15rem;
+  border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+  padding:16px 10px;margin:0 auto 34px;max-width:680px;
+}
+.goal em{color:var(--suit-red);font-style:normal}
+
+h3{
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--suit-red);
+  margin:34px 0 12px;
+  display:flex;align-items:center;gap:12px;
+}
+h3::after{content:"";flex:1;height:1px;background:var(--line)}
+section.game p, section.game li{max-width:72ch}
+ol,ul{padding-left:1.3em;margin:8px 0 8px}
+li{margin-bottom:6px}
+strong{font-weight:700}
+.note{
+  background:var(--stock-dim);border-left:3px solid var(--brass);
+  padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0;
+  font-size:.97rem;
+}
+.note.red{border-left-color:var(--suit-red)}
+
+table{
+  width:100%;border-collapse:collapse;margin:14px 0 18px;font-size:.95rem;
+}
+th{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  text-align:left;color:var(--ink-soft);padding:8px 12px;border-bottom:2px solid var(--ink);
+}
+td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+td.c,th.c{text-align:center}
+td .card-chip{
+  display:inline-block;font-family:var(--mono);font-weight:600;
+  background:#fff;border:1px solid var(--line);border-radius:6px;
+  padding:1px 9px;box-shadow:0 1px 0 rgba(0,0,0,.08);white-space:nowrap;
+}
+.red-suit{color:var(--suit-red)}
+
+pre.cards-art{
+  font-family:var(--mono);font-size:.78rem;line-height:1.35;
+  background:var(--felt-deep);color:#dff0e7;
+  border-radius:10px;padding:18px 20px;overflow-x:auto;margin:14px 0 18px;
+}
+.twocol{display:grid;gap:0 40px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+
+.backlink{
+  display:inline-block;margin-top:30px;
+  font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--line);
+}
+.backlink:hover{color:var(--suit-red);border-color:var(--suit-red)}
+
+/* flat info cards (glossary etc.) */
+.flatcard h2{
+  font-family:var(--display);font-size:1.7rem;text-align:center;margin-bottom:8px;
+}
+.flatcard p.center{text-align:center;color:var(--ink-soft);max-width:60ch;margin:0 auto 10px}
+
+footer{
+  text-align:center;color:#bcd6ca;padding:10px 24px 70px;
+  font-size:.92rem;
+}
+footer a{color:var(--brass-soft)}
+footer .suits{letter-spacing:.7em;margin-left:.7em;margin-bottom:10px;display:block;color:var(--brass-soft)}
+footer .suits .r{color:#e8857a}
+
+@media (max-width:560px){
+  .cards{grid-template-columns:repeat(2,1fr)}
+  section.game::before,section.game::after{font-size:.8rem}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="pips" aria-hidden="true">♠<span class="r">♥</span><span class="r">♦</span>♣</div>
+  <h1>Card Games Rules</h1>
+  <p class="tag">A clean, visual reference for classic card games — how to play, win, and have fun. Made for everyone who's ever said “wait, how do you play this again?”</p>
+  <div class="meta">
+    <span>10 games</span><span>52 cards</span><span>MIT licensed</span>
+  </div>
+</header>
+
+<nav class="deck-nav" aria-label="Game index">
+  <h2>Pick a card</h2>
+  <div class="cards">
+    <a class="gcard" href="#mau-mau"><span class="corner tl">2–6<br>♣</span><span class="emoji">🎴</span><span class="name">Mau‑Mau</span><span class="type">Shedding</span><span class="diff">★</span><span class="corner br">2–6<br>♣</span></a>
+    <a class="gcard" href="#rummy"><span class="corner tl">2–6<br>♠</span><span class="emoji">🂡</span><span class="name">Rummy</span><span class="type">Matching</span><span class="diff">★★</span><span class="corner br">2–6<br>♠</span></a>
+    <a class="gcard" href="#shithead"><span class="corner tl">2–5<br>♣</span><span class="emoji">💩</span><span class="name">Shithead</span><span class="type">Shedding</span><span class="diff">★★</span><span class="corner br">2–5<br>♣</span></a>
+    <a class="gcard" href="#hearts"><span class="corner tl">4<br>♠</span><span class="emoji">♠️</span><span class="name">Hearts</span><span class="type">Trick‑taking</span><span class="diff">★★</span><span class="corner br">4<br>♠</span></a>
+    <a class="gcard" href="#spades"><span class="corner tl">4<br>♣</span><span class="emoji">♣️</span><span class="name">Spades</span><span class="type">Trick‑taking</span><span class="diff">★★★</span><span class="corner br">4<br>♣</span></a>
+    <a class="gcard red" href="#go-fish"><span class="corner tl">2–6<br>♥</span><span class="emoji">🐠</span><span class="name">Go Fish</span><span class="type">Matching</span><span class="diff">★</span><span class="corner br">2–6<br>♥</span></a>
+    <a class="gcard red" href="#crazy-eights"><span class="corner tl">2–7<br>♦</span><span class="emoji">8️⃣</span><span class="name">Crazy Eights</span><span class="type">Shedding</span><span class="diff">★</span><span class="corner br">2–7<br>♦</span></a>
+    <a class="gcard" href="#war"><span class="corner tl">2<br>♠</span><span class="emoji">⚔️</span><span class="name">War</span><span class="type">Comparing</span><span class="diff">★</span><span class="corner br">2<br>♠</span></a>
+    <a class="gcard red" href="#blackjack"><span class="corner tl">2–7<br>♥</span><span class="emoji">🎰</span><span class="name">Blackjack</span><span class="type">Casino</span><span class="diff">★★</span><span class="corner br">2–7<br>♥</span></a>
+    <a class="gcard red" href="#poker"><span class="corner tl">2–10<br>♦</span><span class="emoji">♦️</span><span class="name">Poker</span><span class="type">Vying</span><span class="diff">★★★</span><span class="corner br">2–10<br>♦</span></a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============ MAU-MAU ============ -->
+<section class="game" id="mau-mau" data-pip="M&#10;♣">
+  <div class="gamehead">
+    <div class="emoji">🎴</div>
+    <h2>Mau‑Mau</h2>
+    <p class="lede">A fast, friendly shedding game where the first to ditch all their cards wins. The ancestor of UNO.</p>
+  </div>
+  <div class="facts">
+    <div><div class="k">Players</div><div class="v">2–6</div></div>
+    <div><div class="k">Deck</div><div class="v">32 or 52</div></div>
+    <div><div class="k">Time</div><div class="v">15–30 min</div></div>
+    <div><div class="k">Difficulty</div><div class="v">★ Easy</div></div>
+  </div>
+  <p class="goal">Be the first player to <em>get rid of all your cards</em>.</p>
+
+  <h3>Setup</h3>
+  <ol>
+    <li>Use a standard 52‑card deck (or a 32‑card German deck — 7s through Aces).</li>
+    <li>Deal <strong>5 cards</strong> to each player.</li>
+    <li>Place the rest face‑down as the <strong>stock pile</strong>.</li>
+    <li>Flip the top card face‑up next to it — that starts the <strong>discard pile</strong>.</li>
+  </ol>
+
+  <h3>How to Play</h3>
+  <p>On your turn, you must play <strong>one card</strong> that matches the top of the discard pile by either:</p>
+  <ul>
+    <li><strong>Same suit</strong> (e.g. <span class="red-suit">♥</span> on <span class="red-suit">♥</span>), or</li>
+    <li><strong>Same rank</strong> (e.g. 7 on 7).</li>
+  </ul>
+  <p>If you can't play, <strong>draw one card</strong> from the stock. If it's playable, you may play it immediately; otherwise, your turn ends.</p>
+  <div class="note red">🔔 <strong>The Mau‑Mau rule:</strong> When you play your <strong>second‑to‑last</strong> card, shout <strong>“Mau!”</strong> When you play your <strong>last</strong> card, shout <strong>“Mau‑Mau!”</strong> Forget? Draw 2 cards as a penalty.</div>
+
+  <h3>Special Cards — the fun part</h3>
+  <table>
+    <tr><th class="c">Card</th><th>Effect</th></tr>
+    <tr><td class="c"><span class="card-chip">7</span></td><td>Next player draws <strong>2 cards</strong> (stacks if they also play a 7 → draws 4, 6, 8…)</td></tr>
+    <tr><td class="c"><span class="card-chip">8</span></td><td>Next player <strong>skips</strong> their turn</td></tr>
+    <tr><td class="c"><span class="card-chip">9</span></td><td><strong>Reverses</strong> direction of play</td></tr>
+    <tr><td class="c"><span class="card-chip">J</span></td><td>Wild — change the suit to anything you choose</td></tr>
+    <tr><td class="c"><span class="card-chip">A</span></td><td>Player gets <strong>another turn</strong></td></tr>
+  </table>
+  <div class="note">ℹ️ Regional variants change which cards do what. Agree before you start!</div>
+
+  <h3>Scoring (optional)</h3>
+  <p>When someone goes out, others count points of cards still in hand: number cards = face value, J/Q/K = 10 points, A = 11 points. Lowest total after several rounds wins — or just play “first to win 3 rounds.”</p>
+
+  <div class="twocol">
+    <div>
+      <h3>Strategy Tips</h3>
+      <ul>
+        <li>🎯 <strong>Save your Jacks</strong> — wild cards are powerful late‑game.</li>
+        <li>🔥 <strong>Stack 7s</strong> to dump a big penalty on someone.</li>
+        <li>👀 <strong>Watch what suits opponents avoid</strong> — they probably don't have them.</li>
+        <li>⏰ <strong>Don't forget to say Mau!</strong> — it's the #1 way people lose.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Common Mistakes</h3>
+      <ul>
+        <li>❌ Forgetting to say “Mau” on your second‑to‑last card</li>
+        <li>❌ Playing a Jack and forgetting to call a new suit</li>
+        <li>❌ Not stacking a 7 when you have one (you eat the penalty instead!)</li>
+      </ul>
+    </div>
+  </div>
+  <a class="backlink" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ Back to all games</a>
+</section>
+
+<!-- ============ RUMMY ============ -->
+<section class="game" id="rummy" data-pip="R&#10;♠">
+  <div class="gamehead">
+    <div class="emoji">🂡</div>
+    <h2>Rummy</h2>
+    <p class="lede">Match, meld, and discard. One of the world's most popular card game families — easy to learn, deep to master.</p>
+  </div>
+  <div class="facts">
+    <div><div class="k">Players</div><div class="v">2–6</div></div>
+    <div><div class="k">Deck</div><div class="v">52 cards</div></div>
+    <div><div class="k">Time</div><div class="v">20–45 min</div></div>
+    <div><div class="k">Difficulty</div><div class="v">★★ Medium</div></div>
+  </div>
+  <p class="goal">Be the first to <em>“go out”</em> by melding all your cards into valid sets and runs.</p>
+
+  <h3>Setup</h3>
+  <table style="max-width:340px">
+    <tr><th class="c">Players</th><th class="c">Cards each</th></tr>
+    <tr><td class="c">2</td><td class="c">10</td></tr>
+    <tr><td class="c">3–4</td><td class="c">7</td></tr>
+    <tr><td class="c">5–6</td><td class="c">6</td></tr>
+  </table>
+  <ol>
+    <li>Deal cards as above.</li>
+    <li>Remaining cards form the <strong>stock</strong>, face‑down.</li>
+    <li>Flip the top card face‑up to start the <strong>discard pile</strong>.</li>
+    <li>Ace ranks <strong>low</strong> (A‑2‑3 is a valid run).</li>
+  </ol>
+
+  <h3>What Counts as a Meld?</h3>
+  <p><strong>🔢 Set (group):</strong> three or four cards of the <strong>same rank</strong>, different suits.</p>
+  <pre class="cards-art">┌─────┐  ┌─────┐  ┌─────┐
+│7 ♠  │  │7 ♥  │  │7 ♦  │   ← valid set
+└─────┘  └─────┘  └─────┘</pre>
+  <p><strong>🔗 Run (sequence):</strong> three or more <strong>consecutive</strong> cards of the <strong>same suit</strong>.</p>
+  <pre class="cards-art">┌─────┐  ┌─────┐  ┌─────┐  ┌─────┐
+│5 ♣  │  │6 ♣  │  │7 ♣  │  │8 ♣  │   ← valid run
+└─────┘  └─────┘  └─────┘  └─────┘</pre>
+
+  <h3>How to Play</h3>
+  <p>Each turn has <strong>3 steps</strong>:</p>
+  <ol>
+    <li><strong>Draw</strong> — take one card from the stock OR the top of the discard pile.</li>
+    <li><strong>Meld (optional)</strong> — lay down any valid set/run, or add cards to existing melds (yours or others, depending on variant).</li>
+    <li><strong>Discard</strong> — place one card face‑up on the discard pile. Turn ends.</li>
+  </ol>
+  <p>When a player has melded all their cards (with one card to discard last), they <strong>“go out”</strong> and win the round.</p>
+
+  <h3>Scoring</h3>
+  <p>When someone goes out, opponents score penalty points for cards left in hand:</p>
+  <table style="max-width:420px">
+    <tr><th class="c">Card</th><th class="c">Points</th></tr>
+    <tr><td class="c"><span class="card-chip">2–10</span></td><td class="c">Face value</td></tr>
+    <tr><td class="c"><span class="card-chip">J / Q / K</span></td><td class="c">10 each</td></tr>
+    <tr><td class="c"><span class="card-chip">A</span></td><td class="c">1 (low) or 15 (high) — agree first</td></tr>
+  </table>
+  <p>Game often ends when someone reaches <strong>100 or 500 points</strong> (loser high) — adjust to taste.</p>
+
+  <div class="twocol">
+    <div>
+      <h3>Strategy Tips</h3>
+      <ul>
+        <li>🎯 <strong>Plan two melds at once</strong> — keep cards that could go either way.</li>
+        <li>🗑️ <strong>Watch the discard pile</strong> — never feed opponents the card they're collecting.</li>
+        <li>⚡ <strong>Go out fast in early rounds</strong> — penalty points add up.</li>
+        <li>🃏 <strong>Don't hoard high cards</strong> (J/Q/K) — they're 10 points each if caught.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Common Mistakes</h3>
+      <ul>
+        <li>❌ Drawing from the discard pile without a plan</li>
+        <li>❌ Forgetting to discard at the end of your turn</li>
+        <li>❌ Melding too early and showing your hand</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Popular Variants</h3>
+  <ul>
+    <li><strong>Gin Rummy</strong> — 2 players, 10 cards each, “knock” when unmelded points ≤ 10.</li>
+    <li><strong>Rummy 500</strong> — meld onto opponents' sets; play to 500 points.</li>
+    <li><strong>Canasta</strong> — uses 2 decks + jokers, focused on 7‑card “canastas.”</li>
+    <li><strong>Indian Rummy</strong> — 13 cards, includes a wildcard joker.</li>
+  </ul>
+  <a class="backlink" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ Back to all games</a>
+</section>
+
+<!-- ============ SHITHEAD ============ -->
+<section class="game" id="shithead" data-pip="S&#10;♣">
+  <div class="gamehead">
+    <div class="emoji">💩</div>
+    <h2>Shithead</h2>
+    <p class="lede">A chaotic, hilarious shedding game. Last player holding cards is the “shithead” and deals next round.</p>
+  </div>
+  <div class="facts">
+    <div><div class="k">Players</div><div class="v">2–5</div></div>
+    <div><div class="k">Deck</div><div class="v">52 cards</div></div>
+    <div><div class="k">Time</div><div class="v">15–30 min</div></div>
+    <div><div class="k">Difficulty</div><div class="v">★★ Medium</div></div>
+  </div>
+  <p class="goal">Get rid of all your cards. <em>Don't be the last one holding any.</em></p>
+
+  <h3>Setup</h3>
+  <p>Each player gets <strong>9 cards</strong> in three rows:</p>
+  <pre class="cards-art">┌──┐ ┌──┐ ┌──┐
+│??│ │??│ │??│   ← Face-down (can't look)
+└──┘ └──┘ └──┘
+┌──┐ ┌──┐ ┌──┐
+│5♦│ │J♠│ │8♥│   ← Face-up (everyone sees)
+└──┘ └──┘ └──┘
+┌──┐ ┌──┐ ┌──┐
+│ A│ │ 2│ │ K│   ← Your hand (you see)
+└──┘ └──┘ └──┘</pre>
+  <ol>
+    <li>Deal 3 face‑down cards (don't peek!).</li>
+    <li>Deal 3 face‑up cards on top of those.</li>
+    <li>Deal 3 cards to each player's hand.</li>
+    <li>Before play starts, swap any hand cards with your face‑up cards to optimize.</li>
+    <li>Remaining cards form the <strong>draw pile</strong>.</li>
+  </ol>
+
+  <h3>How to Play</h3>
+  <p>Play moves clockwise. On your turn, play <strong>a card equal to or higher than</strong> the top of the discard pile.</p>
+  <ul>
+    <li>Always keep <strong>3 cards in hand</strong> by drawing from the draw pile after playing.</li>
+    <li>Can't play? <strong>Pick up the entire discard pile</strong> into your hand. 😱</li>
+    <li>Once the draw pile is empty, play through your face‑up row, then face‑down row (you flip these blind!).</li>
+  </ul>
+
+  <h3>Magic Cards</h3>
+  <table>
+    <tr><th class="c">Card</th><th>Effect</th></tr>
+    <tr><td class="c"><span class="card-chip">2</span></td><td>Reset — next player can play anything</td></tr>
+    <tr><td class="c"><span class="card-chip">7</span></td><td>Next player must play <strong>7 or lower</strong></td></tr>
+    <tr><td class="c"><span class="card-chip">8</span></td><td>Invisible — next player matches the card <strong>under</strong> the 8</td></tr>
+    <tr><td class="c"><span class="card-chip">10</span></td><td><strong>Burns</strong> the pile — discard it all, same player goes again</td></tr>
+    <tr><td class="c"><span class="card-chip">4 × same rank</span></td><td>Burns the pile (any time, even mid‑stack)</td></tr>
+  </table>
+  <div class="note red">🔥 <strong>Burn the pile = it's gone forever.</strong> A powerful escape from a high stack.</div>
+
+  <h3>The Endgame</h3>
+  <p>Once your hand and face‑up cards are gone, you play <strong>face‑down cards blind</strong>:</p>
+  <ol>
+    <li>Flip one without looking.</li>
+    <li>If it's playable → you played it!</li>
+    <li>If it's not → pick up the pile and resume normal play with that card in hand.</li>
+  </ol>
+  <p><strong>Last player still holding cards = the Shithead.</strong> 💩 They deal next round (and endure the shame).</p>
+
+  <div class="twocol">
+    <div>
+      <h3>Strategy Tips</h3>
+      <ul>
+        <li>🎯 <strong>Save your 2s, 10s, and Jokers</strong> for emergencies (escape big piles).</li>
+        <li>👀 <strong>Watch what's face‑up</strong> in front of opponents — they're stuck playing those eventually.</li>
+        <li>🔥 <strong>Burn the pile when it gets high</strong> — don't let yourself be forced to pick it up.</li>
+        <li>🃏 <strong>Swap weak hand cards into face‑up</strong> before play starts.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Common Mistakes</h3>
+      <ul>
+        <li>❌ Looking at your face‑down cards (you can't!)</li>
+        <li>❌ Wasting 10s early when the pile is small</li>
+        <li>❌ Forgetting to draw back up to 3 cards</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Variants</h3>
+  <p>Also known as <strong>Karma</strong>, <strong>Palace</strong>, or <strong>President</strong> (in some regions). Magic card rules vary wildly — agree before starting!</p>
+  <a class="backlink" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ Back to all games</a>
+</section>
+
+<!-- ============ HEARTS ============ -->
+<section class="game" id="hearts" data-pip="H&#10;♠">
+  <div class="gamehead">
+    <div class="emoji">♠️</div>
+    <h2>Hearts</h2>
+    <p class="lede">A classic trick‑taking game where you want <strong>fewer</strong> points, not more. Avoid Hearts and dodge the Queen of Spades!</p>
+  </div>
+  <div class="facts">
+    <div><div class="k">Players</div><div class="v">4 (best)</div></div>
+    <div><div class="k">Deck</div><div class="v">52 cards</div></div>
+    <div><div class="k">Time</div><div class="v">30–60 min</div></div>
+    <div><div class="k">Difficulty</div><div class="v">★★ Medium</div></div>
+  </div>
+  <p class="goal">Score the <em>fewest</em> points. Game ends when someone hits 100 — lowest score wins.</p>
+
+  <h3>Penalty Cards</h3>
+  <table style="max-width:440px">
+    <tr><th>Card</th><th class="c">Points</th></tr>
+    <tr><td>Each <span class="red-suit">♥</span> Heart</td><td class="c"><strong>1 point</strong></td></tr>
+    <tr><td>♠ Queen of Spades</td><td class="c"><strong>13 points</strong> 😱</td></tr>
+  </table>
+  <p>Everything else: 0 points.</p>
+
+  <h3>Setup</h3>
+  <ol>
+    <li>Deal all 52 cards — <strong>13 to each player</strong>.</li>
+    <li><strong>Pass 3 cards</strong> to another player before play starts: round 1 → pass <strong>left</strong>, round 2 → pass <strong>right</strong>, round 3 → pass <strong>across</strong>, round 4 → <strong>no pass</strong>. The cycle repeats.</li>
+  </ol>
+
+  <h3>How to Play</h3>
+  <ol>
+    <li>The player with the <strong>2 of Clubs</strong> leads it to start the first trick.</li>
+    <li>Going clockwise, each player plays one card. <strong>You must follow suit</strong> if possible.</li>
+    <li>If you can't follow suit, play any card (this is your chance to dump Hearts or the ♠Q).</li>
+    <li>Highest card of the led suit wins the <strong>trick</strong>.</li>
+    <li>Winner of the trick leads the next one.</li>
+  </ol>
+  <div class="note red">🚫 <strong>You cannot lead Hearts</strong> until Hearts have been “broken” — meaning, until someone has played one because they couldn't follow suit.</div>
+
+  <h3>Shoot the Moon!</h3>
+  <p>If you collect <strong>ALL 13 Hearts + the Queen of Spades</strong> in one round, instead of 26 points to you: ✨ <strong>all other players get 26 points each.</strong> ✨ A massive risk‑reward play — usually you should try to block someone you suspect of shooting.</p>
+
+  <h3>Scoring</h3>
+  <p>After each round, total each player's penalty cards. <strong>The game ends when any player reaches 100 points.</strong> Lowest score wins.</p>
+
+  <div class="twocol">
+    <div>
+      <h3>Strategy Tips</h3>
+      <ul>
+        <li>🗡️ <strong>Pass dangerous cards</strong> — high spades (A, K, Q), high hearts, voids in a suit you want to dump.</li>
+        <li>🎯 <strong>Try to be “void”</strong> in a suit early so you can dump hearts/♠Q later.</li>
+        <li>👑 <strong>Watch for the Queen of Spades</strong> — if you have it, play it on the highest spade trick you can.</li>
+        <li>🌙 <strong>Spot the moon shoot</strong> — if one player is taking every heart, you may need to let them win the ♠Q to break it.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Common Mistakes</h3>
+      <ul>
+        <li>❌ Leading Hearts before they're broken</li>
+        <li>❌ Holding onto the Queen of Spades when you should be dumping her</li>
+        <li>❌ Forgetting which direction to pass</li>
+      </ul>
+    </div>
+  </div>
+  <a class="backlink" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ Back to all games</a>
+</section>
+
+<!-- ============ SPADES ============ -->
+<section class="game" id="spades" data-pip="S&#10;♣">
+  <div class="gamehead">
+    <div class="emoji">♣️</div>
+    <h2>Spades</h2>
+    <p class="lede">A team‑based trick‑taking game built around <strong>bidding</strong>. Promise tricks, deliver them, win big.</p>
+  </div>
+  <div class="facts">
+    <div><div class="k">Players</div><div class="v">4 (2×2 teams)</div></div>
+    <div><div class="k">Deck</div><div class="v">52 cards</div></div>
+    <div><div class="k">Time</div><div class="v">30–60 min</div></div>
+    <div><div class="k">Difficulty</div><div class="v">★★★ Hard</div></div>
+  </div>
+  <p class="goal">First team to <em>500 points</em> wins. Spades are always trump. ♠️</p>
+
+  <h3>Setup</h3>
+  <ol>
+    <li>Partners sit <strong>across</strong> from each other.</li>
+    <li>Deal all 52 cards — <strong>13 each</strong>.</li>
+    <li>Cards rank: <strong>A (high) → K → Q → J → 10 → … → 2 (low)</strong>.</li>
+    <li>♠️ Spades <strong>always beat</strong> every other suit.</li>
+  </ol>
+
+  <h3>Bidding — the key skill</h3>
+  <p>Before play, each player declares <strong>how many tricks they'll take</strong> (0 through 13).</p>
+  <ul>
+    <li>A team's bid = sum of both partners' bids.</li>
+    <li>A <strong>bid of 0 = “Nil”</strong> — partner risks more for a big bonus (see below).</li>
+  </ul>
+
+  <h3>How to Play</h3>
+  <ol>
+    <li>The player left of the dealer leads any non‑Spade card (Spades are “not broken” yet).</li>
+    <li>Going clockwise, each player <strong>must follow suit</strong> if able.</li>
+    <li>Can't follow? Play any card — <strong>including a Spade to “trump.”</strong></li>
+    <li>Highest Spade wins. If no Spades were played, highest card of the led suit wins.</li>
+    <li>Winner leads the next trick.</li>
+  </ol>
+  <div class="note red">🚫 You can't lead Spades until someone has trumped a trick (Spades are “broken”).</div>
+
+  <h3>Scoring</h3>
+  <ul>
+    <li>✅ <strong>Made your bid:</strong> 10 × bid points, plus 1 point per overtrick (“bag”).</li>
+    <li>❌ <strong>Missed your bid:</strong> −10 × bid points (negative!).</li>
+    <li>🛍️ <strong>Bags penalty:</strong> every 10 bags accumulated = <strong>−100 points</strong>. Overtricks hurt long‑term!</li>
+    <li>🌟 <strong>Nil bonus:</strong> successful Nil (took 0 tricks) = <strong>+100</strong>; failed Nil (took any trick) = <strong>−100</strong>.</li>
+  </ul>
+
+  <h3>Blind Nil (advanced)</h3>
+  <p>Bid Nil <strong>before looking at your cards</strong> — for <strong>±200 points</strong>. A high‑risk classic.</p>
+
+  <div class="twocol">
+    <div>
+      <h3>Strategy Tips</h3>
+      <ul>
+        <li>🎯 <strong>Count tricks carefully</strong> — overbidding tanks you, underbidding builds bags.</li>
+        <li>🤝 <strong>Read your partner's bid</strong> — adjust yours to balance.</li>
+        <li>♠️ <strong>Save spades for stealing tricks</strong> opponents lead.</li>
+        <li>🚮 <strong>Dump high cards</strong> when your partner is winning a trick — don't waste them.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Common Mistakes</h3>
+      <ul>
+        <li>❌ Overbidding to “look good” — the penalty is harsh</li>
+        <li>❌ Forgetting bags accumulate across rounds</li>
+        <li>❌ Leading spades too early — illegal until broken</li>
+      </ul>
+    </div>
+  </div>
+  <a class="backlink" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ Back to all games</a>
+</section>
+
+<!-- ============ GO FISH ============ -->
+<section class="game red" id="go-fish" data-pip="G&#10;♥">
+  <div class="gamehead">
+    <div class="emoji">🐠</div>
+    <h2>Go Fish</h2>
+    <p class="lede">The perfect starter card game. Ask for cards, collect sets of 4, try not to go “fishing.”</p>
+  </div>
+  <div class="facts">
+    <div><div class="k">Players</div><div class="v">2–6</div></div>
+    <div><div class="k">Deck</div><div class="v">52 cards</div></div>
+    <div><div class="k">Time</div><div class="v">10–20 min</div></div>
+    <div><div class="k">Difficulty</div><div class="v">★ Easy</div></div>
+  </div>
+  <p class="goal">Collect the most <em>“books”</em> — sets of 4 cards of the same rank.</p>
+
+  <h3>Setup</h3>
+  <table style="max-width:320px">
+    <tr><th class="c">Players</th><th class="c">Cards each</th></tr>
+    <tr><td class="c">2–3</td><td class="c">7</td></tr>
+    <tr><td class="c">4–6</td><td class="c">5</td></tr>
+  </table>
+  <p>Remaining cards go face‑down in the middle as the <strong>“pond.”</strong></p>
+
+  <h3>How to Play</h3>
+  <ol>
+    <li><strong>Pick a player</strong> and ask: <em>“Do you have any sevens?”</em> (or any rank). 🛑 You must already hold at least one card of that rank.</li>
+    <li>If they have any → they give you <strong>ALL</strong> of them → you go again.</li>
+    <li>If they don't → they say <strong>“Go Fish!”</strong> → you draw one card from the pond. 🎣 If you drew the rank you asked for, show it and go again. Otherwise, your turn ends.</li>
+  </ol>
+  <p>Whenever you collect <strong>all 4</strong> of a rank, lay them face‑up as a <strong>book</strong> in front of you.</p>
+
+  <h3>Game End</h3>
+  <p>The game ends when all 13 books have been collected, or the pond runs out and players empty their hands. <strong>Most books wins!</strong></p>
+
+  <div class="twocol">
+    <div>
+      <h3>Strategy Tips</h3>
+      <ul>
+        <li>🧠 <strong>Remember what others ask for</strong> — they have those ranks.</li>
+        <li>🎯 <strong>Target players who recently asked</strong> for cards you might want later.</li>
+        <li>🤫 <strong>Don't reveal more than needed</strong> — answer just yes or no.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Common Mistakes</h3>
+      <ul>
+        <li>❌ Asking for a rank you don't already hold (illegal!)</li>
+        <li>❌ Forgetting to “go again” after a successful match</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">👶 <strong>Great for:</strong> kids, beginners, and warming up before a longer game night.</div>
+  <a class="backlink" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ Back to all games</a>
+</section>
+
+<!-- ============ CRAZY EIGHTS ============ -->
+<section class="game red" id="crazy-eights" data-pip="8&#10;♦">
+  <div class="gamehead">
+    <div class="emoji">8️⃣</div>
+    <h2>Crazy Eights</h2>
+    <p class="lede">The original UNO. Match suit or rank, dump your hand, and use 8s as wild cards.</p>
+  </div>
+  <div class="facts">
+    <div><div class="k">Players</div><div class="v">2–7</div></div>
+    <div><div class="k">Deck</div><div class="v">52 cards</div></div>
+    <div><div class="k">Time</div><div class="v">15–25 min</div></div>
+    <div><div class="k">Difficulty</div><div class="v">★ Easy</div></div>
+  </div>
+  <p class="goal">Be the first to <em>get rid of all your cards</em>.</p>
+
+  <h3>Setup</h3>
+  <table style="max-width:320px">
+    <tr><th class="c">Players</th><th class="c">Cards each</th></tr>
+    <tr><td class="c">2</td><td class="c">7</td></tr>
+    <tr><td class="c">3+</td><td class="c">5</td></tr>
+  </table>
+  <ol>
+    <li>Deal as above.</li>
+    <li>Place the rest face‑down as the <strong>stock</strong>.</li>
+    <li>Flip the top card to start the <strong>discard pile</strong>. If it's an 8, bury it and flip another.</li>
+  </ol>
+
+  <h3>How to Play</h3>
+  <p>On your turn, play <strong>one card</strong> that matches the top of the discard pile by:</p>
+  <ul>
+    <li>Same <strong>suit</strong>, or</li>
+    <li>Same <strong>rank</strong>, or</li>
+    <li><strong>Any 8</strong> (wild — see below).</li>
+  </ul>
+  <p>Can't play? <strong>Draw from stock</strong> until you can (some house rules: just draw 1).</p>
+  <div class="note red">⭐ <strong>The Crazy 8:</strong> when you play an 8, <strong>declare a new suit</strong>. The next player must play that suit (or another 8).</div>
+
+  <h3>Optional Special Cards</h3>
+  <p>These vary by house — agree first!</p>
+  <table>
+    <tr><th class="c">Card</th><th>Effect</th></tr>
+    <tr><td class="c"><span class="card-chip">2</span></td><td>Next player draws 2 (stacks)</td></tr>
+    <tr><td class="c"><span class="card-chip">Q♠</span></td><td>Next player draws 5</td></tr>
+    <tr><td class="c"><span class="card-chip">J</span></td><td>Skip next player</td></tr>
+    <tr><td class="c"><span class="card-chip">A</span></td><td>Reverse direction</td></tr>
+  </table>
+
+  <h3>Scoring</h3>
+  <p>When someone goes out, others count points in hand:</p>
+  <table style="max-width:380px">
+    <tr><th class="c">Card</th><th class="c">Points</th></tr>
+    <tr><td class="c"><span class="card-chip">8</span></td><td class="c">50</td></tr>
+    <tr><td class="c"><span class="card-chip">K, Q, J, 10</span></td><td class="c">10</td></tr>
+    <tr><td class="c"><span class="card-chip">A</span></td><td class="c">1</td></tr>
+    <tr><td class="c">Others</td><td class="c">Face value</td></tr>
+  </table>
+  <p>First to reach 100 points (the loser) ends the game. Lowest total wins.</p>
+
+  <div class="twocol">
+    <div>
+      <h3>Strategy Tips</h3>
+      <ul>
+        <li>🎯 <strong>Save your 8s for tight spots</strong> — wilds are most valuable late.</li>
+        <li>👀 <strong>Track the suit pattern</strong> — note what opponents avoid.</li>
+        <li>🃏 <strong>Dump high‑value cards first</strong> in case you don't go out.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Common Mistakes</h3>
+      <ul>
+        <li>❌ Playing an 8 without declaring a suit</li>
+        <li>❌ Holding 8s when you could've dumped them</li>
+      </ul>
+    </div>
+  </div>
+  <a class="backlink" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ Back to all games</a>
+</section>
+
+<!-- ============ WAR ============ -->
+<section class="game" id="war" data-pip="W&#10;♠">
+  <div class="gamehead">
+    <div class="emoji">⚔️</div>
+    <h2>War</h2>
+    <p class="lede">The simplest card game ever. Pure luck. Great with kids — or when you're too tired to think.</p>
+  </div>
+  <div class="facts">
+    <div><div class="k">Players</div><div class="v">2</div></div>
+    <div><div class="k">Deck</div><div class="v">52 cards</div></div>
+    <div><div class="k">Time</div><div class="v">10–30 min</div></div>
+    <div><div class="k">Difficulty</div><div class="v">★ Easy</div></div>
+  </div>
+  <p class="goal">Win all <em>52 cards</em>. Or, more realistically, play until someone gives up.</p>
+
+  <h3>Setup</h3>
+  <ol>
+    <li>Split the deck evenly — <strong>26 cards each</strong>, face‑down.</li>
+    <li>Don't look at them.</li>
+  </ol>
+
+  <h3>How to Play</h3>
+  <p>Both players flip the top card of their pile <strong>at the same time</strong>:</p>
+  <ul>
+    <li>🏆 <strong>Higher card wins</strong> both cards. Put them at the bottom of your stack.</li>
+    <li>⚔️ <strong>Tie? It's WAR!</strong></li>
+  </ul>
+  <p><strong>How war works:</strong></p>
+  <ol>
+    <li>Each player places <strong>3 cards face‑down</strong>.</li>
+    <li>Then flips a <strong>4th card face‑up</strong>.</li>
+    <li>Higher face‑up card wins <strong>all 10 cards</strong> in the pile.</li>
+    <li>Another tie? Another war (3 down, 1 up) — stack the prizes!</li>
+  </ol>
+  <pre class="cards-art">Player A:  [4♦]  vs  Player B:  [J♠]   →  B wins both cards
+Player A:  [Q♥]  vs  Player B:  [Q♣]   →  WAR! ⚔️
+           ↓ 3 face-down + 1 face-up each
+           [?][?][?][9♠]   vs   [?][?][?][K♦]   →  B wins all 10</pre>
+
+  <h3>Game End</h3>
+  <p>The game ends when one player has all 52 cards.</p>
+  <div class="note">⚠️ Games can drag on forever. Common fix: play to a time limit, or “whoever has more cards after 15 minutes.”</div>
+
+  <h3>“Strategy” Tips</h3>
+  <p>There is no strategy. It's 100% luck. Embrace it.</p>
+  <ul>
+    <li>🎲 Cheer dramatically on every flip</li>
+    <li>⚔️ War is the fun part — make it loud</li>
+  </ul>
+  <div class="note">👶 <strong>Great for:</strong> kids learning card ranks, killing 10 minutes, or anyone who just wants to flip cards without thinking.</div>
+  <a class="backlink" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ Back to all games</a>
+</section>
+
+<!-- ============ BLACKJACK ============ -->
+<section class="game red" id="blackjack" data-pip="21&#10;♥">
+  <div class="gamehead">
+    <div class="emoji">🎰</div>
+    <h2>Blackjack</h2>
+    <p class="lede">Beat the dealer by getting as close to <strong>21</strong> as possible — without going over.</p>
+  </div>
+  <div class="facts">
+    <div><div class="k">Players</div><div class="v">2–7 + dealer</div></div>
+    <div><div class="k">Deck</div><div class="v">1–8 decks</div></div>
+    <div><div class="k">Time</div><div class="v">20–60 min</div></div>
+    <div><div class="k">Difficulty</div><div class="v">★★ Medium</div></div>
+  </div>
+  <p class="goal">Get a hand value closer to <em>21</em> than the dealer — without going over (busting).</p>
+
+  <h3>Card Values</h3>
+  <table style="max-width:380px">
+    <tr><th class="c">Card</th><th class="c">Value</th></tr>
+    <tr><td class="c"><span class="card-chip">2–10</span></td><td class="c">Face value</td></tr>
+    <tr><td class="c"><span class="card-chip">J / Q / K</span></td><td class="c">10</td></tr>
+    <tr><td class="c"><span class="card-chip">A</span></td><td class="c"><strong>1 or 11</strong> (you choose)</td></tr>
+  </table>
+  <p>A hand with an Ace counted as 11 is called a <strong>“soft”</strong> hand (it can't bust on the next card).</p>
+
+  <h3>Setup</h3>
+  <ol>
+    <li>One player is the <strong>dealer</strong> (rotate or fix).</li>
+    <li>Players place bets (chips, candy, anything).</li>
+    <li>The dealer gives each player <strong>2 cards face‑up</strong>.</li>
+    <li>The dealer takes 2 cards — <strong>one face‑up, one face‑down</strong> (“hole card”).</li>
+  </ol>
+  <div class="note red">🌟 <strong>Blackjack!</strong> Got an <strong>Ace + a 10‑value card</strong> in your first two cards? That's a <strong>Blackjack</strong> — instant win, paid <strong>3:2</strong>, unless the dealer also has one (push).</div>
+
+  <h3>How to Play</h3>
+  <p>Going around the table, each player picks one option per turn:</p>
+  <table>
+    <tr><th>Action</th><th>What it does</th></tr>
+    <tr><td><strong>Hit</strong></td><td>Take another card</td></tr>
+    <tr><td><strong>Stand</strong></td><td>Keep your hand, end turn</td></tr>
+    <tr><td><strong>Double Down</strong></td><td>Double your bet, take <strong>exactly one</strong> more card</td></tr>
+    <tr><td><strong>Split</strong></td><td>If your two cards match rank, split into two hands (extra bet on the second)</td></tr>
+    <tr><td><strong>Surrender</strong> <em>(optional)</em></td><td>Forfeit half your bet, end the hand</td></tr>
+  </table>
+  <div class="note red">💥 Go over 21? You <strong>BUST</strong>. You lose immediately, regardless of the dealer.</div>
+
+  <h3>The Dealer's Rules</h3>
+  <p>After all players act, the dealer flips the hole card and plays by <strong>fixed rules</strong>:</p>
+  <ul>
+    <li>Hand value <strong>16 or less</strong> → <strong>must hit</strong>.</li>
+    <li>Hand value <strong>17 or more</strong> → <strong>must stand</strong>.</li>
+    <li>Some tables: dealer hits on <strong>soft 17</strong>.</li>
+  </ul>
+  <p>The dealer has no choices — just follows the rules.</p>
+
+  <h3>How You Win</h3>
+  <table style="max-width:560px">
+    <tr><th>Outcome</th><th class="c">Result</th></tr>
+    <tr><td>Your hand &gt; dealer (no bust)</td><td class="c">✅ Win 1:1</td></tr>
+    <tr><td>Blackjack vs. non‑blackjack dealer</td><td class="c">✅ Win 3:2</td></tr>
+    <tr><td>Tie</td><td class="c">🤝 Push (bet returned)</td></tr>
+    <tr><td>Your hand &lt; dealer (or you bust)</td><td class="c">❌ Lose bet</td></tr>
+    <tr><td>Dealer busts, you didn't</td><td class="c">✅ Win 1:1</td></tr>
+  </table>
+
+  <h3>Basic Strategy — the smart play</h3>
+  <p>A simplified cheat sheet:</p>
+  <table style="max-width:560px">
+    <tr><th class="c">Your hand</th><th class="c">Dealer shows 2–6</th><th class="c">Dealer shows 7–A</th></tr>
+    <tr><td class="c">8 or less</td><td class="c">Hit</td><td class="c">Hit</td></tr>
+    <tr><td class="c">9–11</td><td class="c">Double Down</td><td class="c">Hit</td></tr>
+    <tr><td class="c">12–16</td><td class="c"><strong>Stand</strong></td><td class="c">Hit</td></tr>
+    <tr><td class="c">17+</td><td class="c">Stand</td><td class="c">Stand</td></tr>
+    <tr><td class="c">A,A</td><td class="c">Split</td><td class="c">Split</td></tr>
+    <tr><td class="c">8,8</td><td class="c">Split</td><td class="c">Split</td></tr>
+    <tr><td class="c">10,10</td><td class="c">Stand</td><td class="c">Stand</td></tr>
+  </table>
+  <div class="note">🎯 <strong>The golden rule:</strong> assume the dealer's hole card is a 10.</div>
+
+  <h3>Common Mistakes</h3>
+  <ul>
+    <li>❌ Taking insurance (it's a sucker bet)</li>
+    <li>❌ Standing on soft 17 (you can't bust — hit!)</li>
+    <li>❌ Splitting 10s (you've already got 20, don't ruin it)</li>
+    <li>❌ Chasing losses with bigger bets</li>
+  </ul>
+  <a class="backlink" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ Back to all games</a>
+</section>
+
+<!-- ============ POKER ============ -->
+<section class="game red" id="poker" data-pip="P&#10;♦">
+  <div class="gamehead">
+    <div class="emoji">♦️</div>
+    <h2>Poker — Texas Hold'em</h2>
+    <p class="lede">The world's most popular poker variant. Two hole cards, five community cards, four betting rounds. Easy to learn, lifetime to master.</p>
+  </div>
+  <div class="facts">
+    <div><div class="k">Players</div><div class="v">2–10</div></div>
+    <div><div class="k">Deck</div><div class="v">52 cards</div></div>
+    <div><div class="k">Time</div><div class="v">30+ min</div></div>
+    <div><div class="k">Difficulty</div><div class="v">★★★ Hard</div></div>
+  </div>
+  <p class="goal">Make the best <em>5‑card hand</em> — or bluff everyone else into folding.</p>
+
+  <h3>Hand Rankings — best to worst</h3>
+  <table>
+    <tr><th class="c">#</th><th>Hand</th><th>Example</th></tr>
+    <tr><td class="c">1</td><td>👑 <strong>Royal Flush</strong></td><td>10‑J‑Q‑K‑A all same suit</td></tr>
+    <tr><td class="c">2</td><td>🌊 <strong>Straight Flush</strong></td><td>5 in a row, same suit</td></tr>
+    <tr><td class="c">3</td><td>🎰 <strong>Four of a Kind</strong></td><td>4× same rank</td></tr>
+    <tr><td class="c">4</td><td>🏠 <strong>Full House</strong></td><td>3 of a kind + a pair</td></tr>
+    <tr><td class="c">5</td><td>💧 <strong>Flush</strong></td><td>5 cards same suit</td></tr>
+    <tr><td class="c">6</td><td>📏 <strong>Straight</strong></td><td>5 in a row, mixed suits</td></tr>
+    <tr><td class="c">7</td><td>🎯 <strong>Three of a Kind</strong></td><td>3× same rank</td></tr>
+    <tr><td class="c">8</td><td>✌️✌️ <strong>Two Pair</strong></td><td>Two different pairs</td></tr>
+    <tr><td class="c">9</td><td>✌️ <strong>One Pair</strong></td><td>2× same rank</td></tr>
+    <tr><td class="c">10</td><td>🔝 <strong>High Card</strong></td><td>Highest single card</td></tr>
+  </table>
+  <div class="note">🃏 Ties are broken by <strong>kickers</strong> (next highest card).</div>
+
+  <h3>Setup</h3>
+  <ol>
+    <li>One player has the <strong>Dealer button</strong> (rotates clockwise each hand).</li>
+    <li>The player left of the dealer posts the <strong>small blind</strong> (forced bet).</li>
+    <li>The next player posts the <strong>big blind</strong> (2× small blind).</li>
+    <li>Each player gets <strong>2 cards face‑down</strong> (“hole cards”).</li>
+  </ol>
+
+  <h3>The Four Betting Rounds</h3>
+  <ol>
+    <li><strong>Pre‑Flop</strong> — after hole cards are dealt. Starting left of the big blind, each player can <strong>fold</strong> (quit the hand), <strong>call</strong> (match the current bet), or <strong>raise</strong> (increase the bet).</li>
+    <li><strong>The Flop</strong> — dealer puts <strong>3 community cards face‑up</strong> in the middle. New betting round.</li>
+    <li><strong>The Turn</strong> — dealer adds a <strong>4th community card</strong>. New betting round.</li>
+    <li><strong>The River</strong> — dealer adds a <strong>5th and final community card</strong>. Final betting round.</li>
+  </ol>
+
+  <h3>The Showdown</h3>
+  <p>If 2+ players remain, they reveal cards. <strong>Best 5‑card hand</strong> (made from any combination of the 2 hole + 5 community cards) wins the pot. If only one player remains (everyone else folded), they win — and don't have to show their cards.</p>
+  <pre class="cards-art">Your hole cards:      [A♠] [K♠]
+Community cards:  [Q♠][J♠][10♠][3♦][7♣]
+                  └─────────────────┘
+Your best 5 cards:  A♠ K♠ Q♠ J♠ 10♠  = ROYAL FLUSH 👑</pre>
+
+  <h3>Starting Hand Strength — rough guide</h3>
+  <table style="max-width:560px">
+    <tr><th>Tier</th><th>Hands</th></tr>
+    <tr><td>🔥 Premium</td><td>AA, KK, QQ, AK</td></tr>
+    <tr><td>💪 Strong</td><td>JJ, 10‑10, AQ, AJ, KQ</td></tr>
+    <tr><td>👍 Playable</td><td>99–22, suited connectors (JT, T9), Ax suited</td></tr>
+    <tr><td>😬 Marginal</td><td>Everything else — fold most</td></tr>
+  </table>
+
+  <div class="twocol">
+    <div>
+      <h3>Strategy Tips</h3>
+      <ul>
+        <li>🎯 <strong>Play tight early</strong> — only strong starting hands (pairs, A‑K, A‑Q, suited connectors).</li>
+        <li>👀 <strong>Position matters</strong> — acting last gives you info on others.</li>
+        <li>🧮 <strong>Pot odds</strong> — calculate if a call is worth it vs. the pot size.</li>
+        <li>🃏 <strong>Bluff sparingly</strong> — works best against thoughtful opponents.</li>
+        <li>😶 <strong>Don't tilt</strong> — bad beats happen; play the math, not the emotion.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Common Mistakes</h3>
+      <ul>
+        <li>❌ Playing too many hands (“any 2 cards can win” — they can, but rarely)</li>
+        <li>❌ Calling instead of raising with strong hands</li>
+        <li>❌ Bluffing players who always call</li>
+        <li>❌ Chasing draws with bad pot odds</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Other Poker Variants</h3>
+  <ul>
+    <li><strong>Omaha</strong> — 4 hole cards, must use exactly 2.</li>
+    <li><strong>Seven‑Card Stud</strong> — no community cards, 7 cards each.</li>
+    <li><strong>Five‑Card Draw</strong> — classic home‑game poker, draw to replace cards.</li>
+  </ul>
+  <a class="backlink" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ Back to all games</a>
+</section>
+
+<!-- ============ GLOSSARY & DECK ============ -->
+<div class="flatcard">
+  <h2>📚 Card Game Glossary</h2>
+  <p class="center">Some terms you'll see across these rules:</p>
+  <table>
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td><strong>Trick</strong></td><td>One round where each player plays one card; highest card wins</td></tr>
+    <tr><td><strong>Trump</strong></td><td>A suit that beats all other suits for the round</td></tr>
+    <tr><td><strong>Meld</strong></td><td>A combination of cards (e.g. three of a kind) laid down for points</td></tr>
+    <tr><td><strong>Shedding</strong></td><td>Game type where the goal is to get rid of all your cards</td></tr>
+    <tr><td><strong>Hand</strong></td><td>The cards you currently hold</td></tr>
+    <tr><td><strong>Stock</strong></td><td>The face‑down pile you draw from</td></tr>
+    <tr><td><strong>Discard</strong></td><td>The face‑up pile where played cards go</td></tr>
+    <tr><td><strong>Rank</strong></td><td>The number/value of a card (2 through Ace)</td></tr>
+    <tr><td><strong>Suit</strong></td><td>♠ Spades, <span class="red-suit">♥ Hearts, ♦ Diamonds</span>, ♣ Clubs</td></tr>
+  </table>
+</div>
+
+<div class="flatcard">
+  <h2>🃏 The Deck — Know Your Cards</h2>
+  <pre class="cards-art">┌─────┐  ┌─────┐  ┌─────┐  ┌─────┐
+│A ♠  │  │A ♥  │  │A ♦  │  │A ♣  │
+│     │  │     │  │     │  │     │
+│  ♠ A│  │  ♥ A│  │  ♦ A│  │  ♣ A│
+└─────┘  └─────┘  └─────┘  └─────┘
+Spades   Hearts   Diamonds  Clubs</pre>
+  <p>A standard deck has <strong>52 cards</strong> in 4 suits of 13 ranks each:</p>
+  <p><span class="card-chip">2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10 → J → Q → K → A</span></p>
+  <p style="margin-top:10px">Most games rank Ace <strong>high</strong>, but some rank it <strong>low</strong> or <strong>either</strong>. Each game's section will tell you.</p>
+</div>
+
+<div class="flatcard">
+  <h2>🚀 Quick Start</h2>
+  <p class="center">Pick a game from the deck above — every section is <strong>self‑contained</strong>, so you can start playing without reading anything else.</p>
+  <div class="note">💡 <strong>New to card games?</strong> Start with <a href="#go-fish">Go Fish</a>, <a href="#war">War</a>, or <a href="#crazy-eights">Crazy Eights</a>.</div>
+  <div class="note red">🎓 <strong>Want a challenge?</strong> Try <a href="#spades">Spades</a> or <a href="#poker">Poker</a>.</div>
+</div>
+
+</main>
+
+<footer>
+  <span class="suits" aria-hidden="true">♠<span class="r">♥</span><span class="r">♦</span>♣</span>
+  Happy playing! 🎉 &nbsp;·&nbsp; MIT licensed — use these rules anywhere, for anything.<br>
+  From <a href="https://github.com/CristianPGit/card-games-rules">CristianPGit/card-games-rules</a> on GitHub. Found a mistake or know a variant? Fork the repo and open a pull request.
+</footer>
+
+</body>
+</html>
