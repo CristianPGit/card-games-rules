@@ -42,6 +42,22 @@ On your turn:
 
 Whenever you collect **all 4** of a rank, lay them face-up as a **book** in front of you.
 
+### 🔄 Turn Flow
+
+```mermaid
+flowchart TD
+    A([Your turn]) --> B["Ask a player for a rank<br>(you must hold that rank)"]
+    B --> C{Do they have any?}
+    C -- Yes --> D[They hand over ALL of them]
+    D --> A
+    C -- "No — Go Fish! 🎣" --> E[Draw 1 from the pond]
+    E --> F{Drew the rank<br>you asked for?}
+    F -- "Yes — show it" --> A
+    F -- No --> G([Turn ends])
+    D -.-> H{Got all 4 of a rank?}
+    H -- Yes --> I[Lay down a book 📚]
+```
+
 ---
 
 ## 🏁 Game End

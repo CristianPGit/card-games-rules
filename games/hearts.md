@@ -51,6 +51,21 @@ Everything else: 0 points.
 
 > 🚫 **You cannot lead Hearts** until Hearts have been "broken" — meaning, until someone has played one because they couldn't follow suit.
 
+### 🔄 Trick Flow
+
+```mermaid
+flowchart TD
+    A([Leader plays a card]) --> B[Next player, clockwise]
+    B --> C{Can you follow suit?}
+    C -- Yes --> D[Must play that suit]
+    C -- No --> E["Play anything —<br>dump a ♥ or the Q♠! 😈"]
+    D --> F{All 4 played?}
+    E --> F
+    F -- No --> B
+    F -- Yes --> G[Highest card of led suit<br>takes the trick + its points]
+    G --> H([Trick winner leads next])
+```
+
 ---
 
 ## 🌙 Shoot the Moon!

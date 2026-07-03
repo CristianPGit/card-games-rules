@@ -63,6 +63,23 @@ Dealer adds a **4th community card**. New betting round.
 ### 4️⃣ The River
 Dealer adds a **5th and final community card**. Final betting round.
 
+### 🔄 Hand Flow
+
+```mermaid
+flowchart TD
+    A([Blinds posted,<br>2 hole cards each]) --> B[1️⃣ Pre-Flop betting]
+    B --> C["🃏🃏🃏 The Flop<br>(3 community cards)"]
+    C --> D[2️⃣ Betting round]
+    D --> E["🃏 The Turn<br>(4th card)"]
+    E --> F[3️⃣ Betting round]
+    F --> G["🃏 The River<br>(5th card)"]
+    G --> H[4️⃣ Final betting round]
+    H --> I{More than one<br>player left?}
+    I -- Yes --> J["Showdown — best<br>5-card hand wins 🏆"]
+    I -- "No — everyone folded" --> K([Last player takes the pot<br>without showing cards 😏])
+    B & D & F -.->|everyone else folds| K
+```
+
 ---
 
 ## 🏁 The Showdown

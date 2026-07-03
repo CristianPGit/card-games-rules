@@ -36,6 +36,22 @@ On your turn, you must play **one card** that matches the top of the discard pil
 
 If you can't play, **draw one card** from the stock. If it's playable, you may play it immediately; otherwise, your turn ends.
 
+### 🔄 Turn Flow
+
+```mermaid
+flowchart TD
+    A([Your turn]) --> B{Can you match the top card<br>by suit or rank?}
+    B -- Yes --> C[Play one card]
+    B -- No --> D[Draw 1 from stock]
+    D --> E{Playable?}
+    E -- Yes --> C
+    E -- No --> F([Turn ends])
+    C --> G{Cards left in hand?}
+    G -- "1 → shout Mau!" --> F
+    G -- "0 → shout Mau-Mau!" --> H([🎉 You win!])
+    G -- 2+ --> F
+```
+
 > 🔔 **The Mau-Mau rule:** When you play your **second-to-last** card, you must shout **"Mau!"**. When you play your **last** card, shout **"Mau-Mau!"**. Forget? Draw 2 cards as a penalty.
 
 ---

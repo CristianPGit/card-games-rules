@@ -46,6 +46,22 @@ Both players flip the top card of their pile **at the same time**:
               [?][?][?][9♠]   vs   [?][?][?][K♦]   →  B wins all 10
 ```
 
+### 🔄 Game Flow
+
+```mermaid
+flowchart TD
+    A([Both players flip top card]) --> B{Higher card?}
+    B -- One is higher --> C[Winner takes both cards]
+    B -- "Tie — WAR! ⚔️" --> D[Each: 3 cards face-down<br>+ 1 card face-up]
+    D --> E{Higher face-up card?}
+    E -- One is higher --> F[Winner takes ALL cards in the pile]
+    E -- Tie again --> D
+    C --> G{Does someone<br>have all 52?}
+    F --> G
+    G -- No --> A
+    G -- Yes --> H([🏆 They win!])
+```
+
 ---
 
 ## 🏁 Game End

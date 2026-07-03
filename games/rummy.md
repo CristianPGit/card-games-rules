@@ -67,6 +67,23 @@ Each turn has **3 steps**:
 
 When a player has melded all their cards (with one card to discard last), they **"go out"** and win the round.
 
+### 🔄 Turn Flow
+
+```mermaid
+flowchart TD
+    A([Your turn]) --> B{Draw from…}
+    B -- Stock 🂠 --> C[Take the mystery card]
+    B -- Discard pile --> D[Take the known top card]
+    C --> E{Got a valid<br>set or run?}
+    D --> E
+    E -- Yes --> F["Meld it (optional) —<br>or add to existing melds"]
+    E -- No --> G[Discard one card]
+    F --> G
+    G --> H{All cards melded?}
+    H -- Yes --> I([🎉 You go out — round won!])
+    H -- No --> J([Next player])
+```
+
 ---
 
 ## 🏆 Scoring

@@ -56,6 +56,24 @@ Going around the table, each player picks one option per turn:
 
 > 💥 Go over 21? You **BUST**. You lose immediately, regardless of dealer.
 
+### 🔄 Hand Flow
+
+```mermaid
+flowchart TD
+    A([You get 2 cards]) --> B{Ace + 10-value?}
+    B -- "Yes — Blackjack! 🌟" --> C([Paid 3:2, done])
+    B -- No --> D{Hit or Stand?}
+    D -- Hit --> E[Take a card]
+    E --> F{Over 21?}
+    F -- "Yes — BUST 💥" --> G([You lose])
+    F -- No --> D
+    D -- Stand --> H[Dealer flips hole card,<br>hits to 17+]
+    H --> I{Compare hands}
+    I -- Dealer busts or you're higher --> J([✅ Win 1:1])
+    I -- Tie --> K([🤝 Push])
+    I -- Dealer higher --> G
+```
+
 ---
 
 ## 🤖 The Dealer's Rules

@@ -46,6 +46,21 @@ Before play, each player declares **how many tricks they'll take** (0 through 13
 
 > 🚫 You can't lead Spades until someone has trumped a trick (Spades are "broken").
 
+### 🔄 Round Flow
+
+```mermaid
+flowchart TD
+    A([Deal 13 cards each]) --> B["Everyone bids tricks (0–13)<br>Team bid = partner bids added"]
+    B --> C[Play 13 tricks:<br>follow suit if able,<br>♠ trumps everything]
+    C --> D{Did your team<br>make its bid?}
+    D -- Yes --> E["+10 × bid<br>+1 per bag 🛍️"]
+    D -- No --> F[−10 × bid 😖]
+    E --> G{Any team at<br>500 points?}
+    F --> G
+    G -- No --> A
+    G -- Yes --> H([🏆 That team wins!])
+```
+
 ---
 
 ## 🏆 Scoring

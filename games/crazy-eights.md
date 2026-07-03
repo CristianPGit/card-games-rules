@@ -42,6 +42,21 @@ On your turn, play **one card** that matches the top of the discard pile by:
 
 Can't play? **Draw from stock** until you can (some house rules: just draw 1).
 
+### 🔄 Turn Flow
+
+```mermaid
+flowchart TD
+    A([Your turn]) --> B{Match top card by<br>suit or rank — or play an 8?}
+    B -- Play a card --> C[Card goes on discard pile]
+    B -- "Play an 8 🃏" --> D[Declare a new suit]
+    D --> C
+    B -- "Can't play" --> E[Draw from stock until you can]
+    E --> C
+    C --> F{Hand empty?}
+    F -- Yes --> G([🎉 You win the round!])
+    F -- No --> H([Next player])
+```
+
 ---
 
 ## ⭐ The Crazy 8

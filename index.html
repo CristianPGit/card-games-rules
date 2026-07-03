@@ -197,11 +197,6 @@ td .card-chip{
 }
 .red-suit{color:var(--suit-red)}
 
-pre.cards-art{
-  font-family:var(--mono);font-size:.78rem;line-height:1.35;
-  background:var(--felt-deep);color:#dff0e7;
-  border-radius:10px;padding:18px 20px;overflow-x:auto;margin:14px 0 18px;
-}
 .twocol{display:grid;gap:0 40px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
 
 .backlink{
@@ -225,15 +220,127 @@ footer a{color:var(--brass-soft)}
 footer .suits{letter-spacing:.7em;margin-left:.7em;margin-bottom:10px;display:block;color:var(--brass-soft)}
 footer .suits .r{color:#e8857a}
 
+/* ---------- Mini playing cards ---------- */
+.hand{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0 20px}
+.hand .cap{
+  flex-basis:100%;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-soft);margin-top:2px;
+}
+.hand .vs{font-family:var(--display);font-size:1.1rem;color:var(--ink-soft);padding:0 6px}
+.pc{
+  width:54px;height:76px;background:#fff;
+  border:1px solid var(--line);border-radius:7px;
+  box-shadow:0 1px 1px rgba(0,0,0,.12), 0 3px 7px rgba(0,0,0,.12);
+  position:relative;font-family:var(--mono);font-weight:600;color:var(--ink);
+  display:flex;align-items:center;justify-content:center;flex:0 0 auto;
+}
+.pc b{position:absolute;top:5px;left:7px;font-size:.72rem;line-height:1;font-weight:600}
+.pc i{font-style:normal;font-size:1.5rem;line-height:1}
+.pc.red{color:var(--suit-red)}
+.pc.fade{opacity:.38}
+.pc.back{
+  background:repeating-linear-gradient(45deg,#a8352a 0 6px,#93291f 6px 12px);
+  border-color:#fff;
+}
+.pc.back::after{content:"";position:absolute;inset:4px;border:1.5px solid rgba(255,255,255,.55);border-radius:4px}
+.pc.sm{width:42px;height:60px;border-radius:6px}
+.pc.sm b{font-size:.6rem;top:4px;left:5px}
+.pc.sm i{font-size:1.1rem}
+.pc .x{
+  position:absolute;bottom:4px;right:6px;font-size:.66rem;color:var(--ink-soft);font-weight:600;
+}
+
+/* labeled piles (stock / discard) */
+.piles{display:flex;gap:34px;justify-content:center;margin:18px 0 22px;text-align:center;flex-wrap:wrap}
+.pile .pl{
+  font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-soft);margin-top:7px;
+}
+.pile .stack{position:relative;display:inline-block}
+.pile .stack .pc+.pc{position:absolute;top:-3px;left:3px}
+
+/* poker hand-ranking gallery */
+.rankgrid{display:grid;gap:9px;margin:16px 0 20px}
+.rankrow{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  background:var(--stock-dim);border:1px solid var(--line);border-radius:10px;
+  padding:9px 14px;
+}
+.rankrow .num{font-family:var(--display);font-size:1.15rem;width:26px;text-align:center;color:var(--brass);flex:0 0 auto}
+.rankrow .info{flex:1 1 150px;min-width:140px}
+.rankrow .info .nm{font-weight:700}
+.rankrow .info .ds{font-size:.84rem;color:var(--ink-soft)}
+.rankrow .cs{display:flex;gap:5px;flex-wrap:wrap}
+
+/* blackjack strategy chart */
+td.act{font-family:var(--mono);font-weight:600;text-align:center;font-size:.78rem;letter-spacing:.04em}
+.act-h{background:#f7ddd8;color:#8c2317}
+.act-s{background:#dcead9;color:#1d5c34}
+.act-d{background:#f0e3c4;color:#7a5a17}
+.act-p{background:#e2ddf0;color:#4a3d7a}
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 6px;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase}
+.legend span{padding:3px 12px;border-radius:999px}
+
+/* spades seating diagram */
+.seats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+  max-width:380px;margin:18px auto 22px;text-align:center;
+}
+.seat{
+  border-radius:10px;padding:12px 6px;
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;line-height:1.5;
+}
+.seat b{display:block;font-size:1.2rem;letter-spacing:0}
+.seat.a{background:#dcead9;border:1px solid #b5cdb0;color:#1d5c34}
+.seat.b{background:#f0e3c4;border:1px solid #dcc188;color:#7a5a17}
+.seats .mid{
+  background:var(--felt);color:var(--brass-soft);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem;letter-spacing:.3em;padding-left:.3em;
+}
+.seats .empty{visibility:hidden}
+
+/* hearts passing diagram */
+.passes{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:16px 0 20px}
+.passchip{
+  flex:1 1 120px;max-width:150px;text-align:center;
+  background:var(--stock-dim);border:1px solid var(--line);border-radius:10px;padding:12px 8px;
+}
+.passchip .arr{font-size:1.5rem;line-height:1.2}
+.passchip .rn{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px}
+.passchip .dir{font-weight:700;font-size:.9rem}
+
+/* game finder filter */
+.filterbar{
+  display:flex;gap:8px 18px;flex-wrap:wrap;justify-content:center;align-items:center;
+  margin:0 auto 24px;max-width:720px;
+}
+.filterbar .flabel{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  color:#cfe3d8;
+}
+.filterbar .fgroup{display:flex;gap:6px;flex-wrap:wrap}
+.filterbar button{
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;
+  background:transparent;color:var(--brass-soft);
+  border:1px solid rgba(227,203,152,.45);border-radius:999px;
+  padding:4px 13px;cursor:pointer;transition:background .15s ease,color .15s ease;
+}
+.filterbar button:hover{background:rgba(227,203,152,.15)}
+.filterbar button[aria-pressed="true"]{background:var(--brass-soft);color:var(--felt-deep);border-color:var(--brass-soft);font-weight:600}
+.gcard.off{opacity:.14;filter:saturate(.3)}
+.gcard.off:hover,.gcard.off:focus-visible{transform:none;box-shadow:0 1px 0 rgba(0,0,0,.25), 0 10px 22px rgba(0,0,0,.30)}
+
 @media (max-width:560px){
   .cards{grid-template-columns:repeat(2,1fr)}
   section.game::before,section.game::after{font-size:.8rem}
+  .pc{width:46px;height:65px}
+  .pc i{font-size:1.25rem}
 }
 </style>
 </head>
 <body>
 
-<header class="hero">
+<header class="hero" id="top">
   <div class="pips" aria-hidden="true">♠<span class="r">♥</span><span class="r">♦</span>♣</div>
   <h1>Card Games Rules</h1>
   <p class="tag">A clean, visual reference for classic card games — how to play, win, and have fun. Made for everyone who's ever said “wait, how do you play this again?”</p>
@@ -244,17 +351,35 @@ footer .suits .r{color:#e8857a}
 
 <nav class="deck-nav" aria-label="Game index">
   <h2>Pick a card</h2>
+  <div class="filterbar" role="group" aria-label="Filter games">
+    <span class="flabel">Players</span>
+    <div class="fgroup" data-filter="players">
+      <button aria-pressed="true" data-val="any">Any</button>
+      <button aria-pressed="false" data-val="2">2</button>
+      <button aria-pressed="false" data-val="3">3</button>
+      <button aria-pressed="false" data-val="4">4</button>
+      <button aria-pressed="false" data-val="5">5</button>
+      <button aria-pressed="false" data-val="6">6+</button>
+    </div>
+    <span class="flabel">Difficulty</span>
+    <div class="fgroup" data-filter="diff">
+      <button aria-pressed="true" data-val="any">Any</button>
+      <button aria-pressed="false" data-val="1">★</button>
+      <button aria-pressed="false" data-val="2">★★</button>
+      <button aria-pressed="false" data-val="3">★★★</button>
+    </div>
+  </div>
   <div class="cards">
-    <a class="gcard" href="#mau-mau"><span class="corner tl">2–6<br>♣</span><span class="emoji">🎴</span><span class="name">Mau‑Mau</span><span class="type">Shedding</span><span class="diff">★</span><span class="corner br">2–6<br>♣</span></a>
-    <a class="gcard" href="#rummy"><span class="corner tl">2–6<br>♠</span><span class="emoji">🂡</span><span class="name">Rummy</span><span class="type">Matching</span><span class="diff">★★</span><span class="corner br">2–6<br>♠</span></a>
-    <a class="gcard" href="#shithead"><span class="corner tl">2–5<br>♣</span><span class="emoji">💩</span><span class="name">Shithead</span><span class="type">Shedding</span><span class="diff">★★</span><span class="corner br">2–5<br>♣</span></a>
-    <a class="gcard" href="#hearts"><span class="corner tl">4<br>♠</span><span class="emoji">♠️</span><span class="name">Hearts</span><span class="type">Trick‑taking</span><span class="diff">★★</span><span class="corner br">4<br>♠</span></a>
-    <a class="gcard" href="#spades"><span class="corner tl">4<br>♣</span><span class="emoji">♣️</span><span class="name">Spades</span><span class="type">Trick‑taking</span><span class="diff">★★★</span><span class="corner br">4<br>♣</span></a>
-    <a class="gcard red" href="#go-fish"><span class="corner tl">2–6<br>♥</span><span class="emoji">🐠</span><span class="name">Go Fish</span><span class="type">Matching</span><span class="diff">★</span><span class="corner br">2–6<br>♥</span></a>
-    <a class="gcard red" href="#crazy-eights"><span class="corner tl">2–7<br>♦</span><span class="emoji">8️⃣</span><span class="name">Crazy Eights</span><span class="type">Shedding</span><span class="diff">★</span><span class="corner br">2–7<br>♦</span></a>
-    <a class="gcard" href="#war"><span class="corner tl">2<br>♠</span><span class="emoji">⚔️</span><span class="name">War</span><span class="type">Comparing</span><span class="diff">★</span><span class="corner br">2<br>♠</span></a>
-    <a class="gcard red" href="#blackjack"><span class="corner tl">2–7<br>♥</span><span class="emoji">🎰</span><span class="name">Blackjack</span><span class="type">Casino</span><span class="diff">★★</span><span class="corner br">2–7<br>♥</span></a>
-    <a class="gcard red" href="#poker"><span class="corner tl">2–10<br>♦</span><span class="emoji">♦️</span><span class="name">Poker</span><span class="type">Vying</span><span class="diff">★★★</span><span class="corner br">2–10<br>♦</span></a>
+    <a class="gcard" href="#mau-mau" data-min="2" data-max="6" data-diff="1"><span class="corner tl">2–6<br>♣</span><span class="emoji">🎴</span><span class="name">Mau‑Mau</span><span class="type">Shedding</span><span class="diff">★</span><span class="corner br">2–6<br>♣</span></a>
+    <a class="gcard" href="#rummy" data-min="2" data-max="6" data-diff="2"><span class="corner tl">2–6<br>♠</span><span class="emoji">🂡</span><span class="name">Rummy</span><span class="type">Matching</span><span class="diff">★★</span><span class="corner br">2–6<br>♠</span></a>
+    <a class="gcard" href="#shithead" data-min="2" data-max="5" data-diff="2"><span class="corner tl">2–5<br>♣</span><span class="emoji">💩</span><span class="name">Shithead</span><span class="type">Shedding</span><span class="diff">★★</span><span class="corner br">2–5<br>♣</span></a>
+    <a class="gcard" href="#hearts" data-min="4" data-max="4" data-diff="2"><span class="corner tl">4<br>♠</span><span class="emoji">♠️</span><span class="name">Hearts</span><span class="type">Trick‑taking</span><span class="diff">★★</span><span class="corner br">4<br>♠</span></a>
+    <a class="gcard" href="#spades" data-min="4" data-max="4" data-diff="3"><span class="corner tl">4<br>♣</span><span class="emoji">♣️</span><span class="name">Spades</span><span class="type">Trick‑taking</span><span class="diff">★★★</span><span class="corner br">4<br>♣</span></a>
+    <a class="gcard red" href="#go-fish" data-min="2" data-max="6" data-diff="1"><span class="corner tl">2–6<br>♥</span><span class="emoji">🐠</span><span class="name">Go Fish</span><span class="type">Matching</span><span class="diff">★</span><span class="corner br">2–6<br>♥</span></a>
+    <a class="gcard red" href="#crazy-eights" data-min="2" data-max="7" data-diff="1"><span class="corner tl">2–7<br>♦</span><span class="emoji">8️⃣</span><span class="name">Crazy Eights</span><span class="type">Shedding</span><span class="diff">★</span><span class="corner br">2–7<br>♦</span></a>
+    <a class="gcard" href="#war" data-min="2" data-max="2" data-diff="1"><span class="corner tl">2<br>♠</span><span class="emoji">⚔️</span><span class="name">War</span><span class="type">Comparing</span><span class="diff">★</span><span class="corner br">2<br>♠</span></a>
+    <a class="gcard red" href="#blackjack" data-min="2" data-max="7" data-diff="2"><span class="corner tl">2–7<br>♥</span><span class="emoji">🎰</span><span class="name">Blackjack</span><span class="type">Casino</span><span class="diff">★★</span><span class="corner br">2–7<br>♥</span></a>
+    <a class="gcard red" href="#poker" data-min="2" data-max="10" data-diff="3"><span class="corner tl">2–10<br>♦</span><span class="emoji">♦️</span><span class="name">Poker</span><span class="type">Vying</span><span class="diff">★★★</span><span class="corner br">2–10<br>♦</span></a>
   </div>
 </nav>
 
@@ -282,6 +407,10 @@ footer .suits .r{color:#e8857a}
     <li>Place the rest face‑down as the <strong>stock pile</strong>.</li>
     <li>Flip the top card face‑up next to it — that starts the <strong>discard pile</strong>.</li>
   </ol>
+  <div class="piles" aria-label="Table layout: face-down stock pile next to face-up discard pile">
+    <div class="pile"><span class="stack"><span class="pc back"></span><span class="pc back"></span></span><div class="pl">Stock · face‑down</div></div>
+    <div class="pile"><span class="pc red"><b>9</b><i>♥</i></span><div class="pl">Discard · face‑up</div></div>
+  </div>
 
   <h3>How to Play</h3>
   <p>On your turn, you must play <strong>one card</strong> that matches the top of the discard pile by either:</p>
@@ -289,6 +418,14 @@ footer .suits .r{color:#e8857a}
     <li><strong>Same suit</strong> (e.g. <span class="red-suit">♥</span> on <span class="red-suit">♥</span>), or</li>
     <li><strong>Same rank</strong> (e.g. 7 on 7).</li>
   </ul>
+  <div class="hand" aria-label="Example: on a 9 of hearts you may play the 7 of hearts (same suit) or the 9 of clubs (same rank)">
+    <span class="pc red"><b>9</b><i>♥</i></span>
+    <span class="vs">←</span>
+    <span class="pc red"><b>7</b><i>♥</i></span>
+    <span class="pc"><b>9</b><i>♣</i></span>
+    <span class="pc fade"><b>K</b><i>♠</i></span>
+    <span class="cap">On the 9♥: play 7♥ (suit ✓) or 9♣ (rank ✓) — not K♠</span>
+  </div>
   <p>If you can't play, <strong>draw one card</strong> from the stock. If it's playable, you may play it immediately; otherwise, your turn ends.</p>
   <div class="note red">🔔 <strong>The Mau‑Mau rule:</strong> When you play your <strong>second‑to‑last</strong> card, shout <strong>“Mau!”</strong> When you play your <strong>last</strong> card, shout <strong>“Mau‑Mau!”</strong> Forget? Draw 2 cards as a penalty.</div>
 
@@ -359,13 +496,20 @@ footer .suits .r{color:#e8857a}
 
   <h3>What Counts as a Meld?</h3>
   <p><strong>🔢 Set (group):</strong> three or four cards of the <strong>same rank</strong>, different suits.</p>
-  <pre class="cards-art">┌─────┐  ┌─────┐  ┌─────┐
-│7 ♠  │  │7 ♥  │  │7 ♦  │   ← valid set
-└─────┘  └─────┘  └─────┘</pre>
+  <div class="hand" aria-label="Valid set: 7 of spades, 7 of hearts, 7 of diamonds">
+    <span class="pc"><b>7</b><i>♠</i></span>
+    <span class="pc red"><b>7</b><i>♥</i></span>
+    <span class="pc red"><b>7</b><i>♦</i></span>
+    <span class="cap">✓ Valid set — same rank, different suits</span>
+  </div>
   <p><strong>🔗 Run (sequence):</strong> three or more <strong>consecutive</strong> cards of the <strong>same suit</strong>.</p>
-  <pre class="cards-art">┌─────┐  ┌─────┐  ┌─────┐  ┌─────┐
-│5 ♣  │  │6 ♣  │  │7 ♣  │  │8 ♣  │   ← valid run
-└─────┘  └─────┘  └─────┘  └─────┘</pre>
+  <div class="hand" aria-label="Valid run: 5, 6, 7, 8 of clubs">
+    <span class="pc"><b>5</b><i>♣</i></span>
+    <span class="pc"><b>6</b><i>♣</i></span>
+    <span class="pc"><b>7</b><i>♣</i></span>
+    <span class="pc"><b>8</b><i>♣</i></span>
+    <span class="cap">✓ Valid run — consecutive, same suit</span>
+  </div>
 
   <h3>How to Play</h3>
   <p>Each turn has <strong>3 steps</strong>:</p>
@@ -433,15 +577,22 @@ footer .suits .r{color:#e8857a}
 
   <h3>Setup</h3>
   <p>Each player gets <strong>9 cards</strong> in three rows:</p>
-  <pre class="cards-art">┌──┐ ┌──┐ ┌──┐
-│??│ │??│ │??│   ← Face-down (can't look)
-└──┘ └──┘ └──┘
-┌──┐ ┌──┐ ┌──┐
-│5♦│ │J♠│ │8♥│   ← Face-up (everyone sees)
-└──┘ └──┘ └──┘
-┌──┐ ┌──┐ ┌──┐
-│ A│ │ 2│ │ K│   ← Your hand (you see)
-└──┘ └──┘ └──┘</pre>
+  <div class="hand" aria-label="Row 1: three face-down cards you can't look at">
+    <span class="pc back"></span><span class="pc back"></span><span class="pc back"></span>
+    <span class="cap">Face‑down — can't look 🙈</span>
+  </div>
+  <div class="hand" aria-label="Row 2: three face-up cards everyone can see">
+    <span class="pc red"><b>5</b><i>♦</i></span>
+    <span class="pc"><b>J</b><i>♠</i></span>
+    <span class="pc red"><b>8</b><i>♥</i></span>
+    <span class="cap">Face‑up — everyone sees 👀</span>
+  </div>
+  <div class="hand" aria-label="Row 3: three cards in your hand that only you see">
+    <span class="pc"><b>A</b><i>♣</i></span>
+    <span class="pc red"><b>2</b><i>♥</i></span>
+    <span class="pc"><b>K</b><i>♠</i></span>
+    <span class="cap">Your hand — only you see 🤫</span>
+  </div>
   <ol>
     <li>Deal 3 face‑down cards (don't peek!).</li>
     <li>Deal 3 face‑up cards on top of those.</li>
@@ -519,18 +670,28 @@ footer .suits .r{color:#e8857a}
   <p class="goal">Score the <em>fewest</em> points. Game ends when someone hits 100 — lowest score wins.</p>
 
   <h3>Penalty Cards</h3>
-  <table style="max-width:440px">
-    <tr><th>Card</th><th class="c">Points</th></tr>
-    <tr><td>Each <span class="red-suit">♥</span> Heart</td><td class="c"><strong>1 point</strong></td></tr>
-    <tr><td>♠ Queen of Spades</td><td class="c"><strong>13 points</strong> 😱</td></tr>
-  </table>
-  <p>Everything else: 0 points.</p>
+  <div class="hand" aria-label="Each heart is worth 1 point; the queen of spades is worth 13 points">
+    <span class="pc red"><b>A</b><i>♥</i><span class="x">1 pt</span></span>
+    <span class="pc red"><b>K</b><i>♥</i><span class="x">1 pt</span></span>
+    <span class="pc red fade"><b>Q</b><i>♥</i></span>
+    <span class="pc red fade"><b>J</b><i>♥</i></span>
+    <span class="vs">…×13</span>
+    <span class="pc"><b>Q</b><i>♠</i><span class="x">13!</span></span>
+    <span class="cap">Each ♥ = 1 point · Q♠ = 13 points 😱 · everything else = 0</span>
+  </div>
 
   <h3>Setup</h3>
   <ol>
     <li>Deal all 52 cards — <strong>13 to each player</strong>.</li>
-    <li><strong>Pass 3 cards</strong> to another player before play starts: round 1 → pass <strong>left</strong>, round 2 → pass <strong>right</strong>, round 3 → pass <strong>across</strong>, round 4 → <strong>no pass</strong>. The cycle repeats.</li>
+    <li><strong>Pass 3 cards</strong> to another player before play starts. The direction rotates each round:</li>
   </ol>
+  <div class="passes" aria-label="Passing rotation: round 1 left, round 2 right, round 3 across, round 4 no pass">
+    <div class="passchip"><div class="rn">Round 1</div><div class="arr">⬅️</div><div class="dir">Pass left</div></div>
+    <div class="passchip"><div class="rn">Round 2</div><div class="arr">➡️</div><div class="dir">Pass right</div></div>
+    <div class="passchip"><div class="rn">Round 3</div><div class="arr">⬆️</div><div class="dir">Pass across</div></div>
+    <div class="passchip"><div class="rn">Round 4</div><div class="arr">✋</div><div class="dir">No pass</div></div>
+  </div>
+  <p style="text-align:center;color:var(--ink-soft);font-size:.9rem">…then the cycle repeats.</p>
 
   <h3>How to Play</h3>
   <ol>
@@ -587,7 +748,20 @@ footer .suits .r{color:#e8857a}
 
   <h3>Setup</h3>
   <ol>
-    <li>Partners sit <strong>across</strong> from each other.</li>
+    <li>Partners sit <strong>across</strong> from each other:</li>
+  </ol>
+  <div class="seats" aria-label="Seating: team A partners sit north and south, team B partners sit east and west">
+    <div class="empty"></div>
+    <div class="seat a"><b>🧑</b>Team A</div>
+    <div class="empty"></div>
+    <div class="seat b"><b>🧑</b>Team B</div>
+    <div class="mid">♠</div>
+    <div class="seat b"><b>🧑</b>Team B</div>
+    <div class="empty"></div>
+    <div class="seat a"><b>🧑</b>Team A</div>
+    <div class="empty"></div>
+  </div>
+  <ol start="2">
     <li>Deal all 52 cards — <strong>13 each</strong>.</li>
     <li>Cards rank: <strong>A (high) → K → Q → J → 10 → … → 2 (low)</strong>.</li>
     <li>♠️ Spades <strong>always beat</strong> every other suit.</li>
@@ -810,10 +984,24 @@ footer .suits .r{color:#e8857a}
     <li>Higher face‑up card wins <strong>all 10 cards</strong> in the pile.</li>
     <li>Another tie? Another war (3 down, 1 up) — stack the prizes!</li>
   </ol>
-  <pre class="cards-art">Player A:  [4♦]  vs  Player B:  [J♠]   →  B wins both cards
-Player A:  [Q♥]  vs  Player B:  [Q♣]   →  WAR! ⚔️
-           ↓ 3 face-down + 1 face-up each
-           [?][?][?][9♠]   vs   [?][?][?][K♦]   →  B wins all 10</pre>
+  <div class="hand" aria-label="Example: 4 of diamonds versus jack of spades — the jack wins both cards">
+    <span class="pc red"><b>4</b><i>♦</i></span>
+    <span class="vs">vs</span>
+    <span class="pc"><b>J</b><i>♠</i></span>
+    <span class="cap">J♠ is higher → B wins both cards</span>
+  </div>
+  <div class="hand" aria-label="Example of a war: queen of hearts ties queen of clubs, each player adds three face-down cards and one face-up card; king of diamonds beats 9 of spades and wins all ten cards">
+    <span class="pc red"><b>Q</b><i>♥</i></span>
+    <span class="vs">vs</span>
+    <span class="pc"><b>Q</b><i>♣</i></span>
+    <span class="cap">Tie → WAR! ⚔️ Each plays 3 down + 1 up:</span>
+    <span class="pc sm back"></span><span class="pc sm back"></span><span class="pc sm back"></span>
+    <span class="pc sm"><b>9</b><i>♠</i></span>
+    <span class="vs">vs</span>
+    <span class="pc sm back"></span><span class="pc sm back"></span><span class="pc sm back"></span>
+    <span class="pc sm red"><b>K</b><i>♦</i></span>
+    <span class="cap">K♦ beats 9♠ → B wins all 10 cards</span>
+  </div>
 
   <h3>Game End</h3>
   <p>The game ends when one player has all 52 cards.</p>
@@ -860,6 +1048,15 @@ Player A:  [Q♥]  vs  Player B:  [Q♣]   →  WAR! ⚔️
     <li>The dealer gives each player <strong>2 cards face‑up</strong>.</li>
     <li>The dealer takes 2 cards — <strong>one face‑up, one face‑down</strong> (“hole card”).</li>
   </ol>
+  <div class="hand" aria-label="Blackjack example: ace of spades plus king of hearts equals 21; dealer shows one card up and one face-down hole card">
+    <span class="pc"><b>A</b><i>♠</i></span>
+    <span class="pc red"><b>K</b><i>♥</i></span>
+    <span class="vs">= 21 🌟</span>
+    <span class="cap">You: Ace + ten‑value = Blackjack!</span>
+    <span class="pc red"><b>10</b><i>♦</i></span>
+    <span class="pc back"></span>
+    <span class="cap">Dealer: one up, one face‑down (“hole card”)</span>
+  </div>
   <div class="note red">🌟 <strong>Blackjack!</strong> Got an <strong>Ace + a 10‑value card</strong> in your first two cards? That's a <strong>Blackjack</strong> — instant win, paid <strong>3:2</strong>, unless the dealer also has one (push).</div>
 
   <h3>How to Play</h3>
@@ -895,15 +1092,18 @@ Player A:  [Q♥]  vs  Player B:  [Q♣]   →  WAR! ⚔️
 
   <h3>Basic Strategy — the smart play</h3>
   <p>A simplified cheat sheet:</p>
+  <div class="legend" aria-hidden="true">
+    <span class="act-h">Hit</span><span class="act-s">Stand</span><span class="act-d">Double</span><span class="act-p">Split</span>
+  </div>
   <table style="max-width:560px">
     <tr><th class="c">Your hand</th><th class="c">Dealer shows 2–6</th><th class="c">Dealer shows 7–A</th></tr>
-    <tr><td class="c">8 or less</td><td class="c">Hit</td><td class="c">Hit</td></tr>
-    <tr><td class="c">9–11</td><td class="c">Double Down</td><td class="c">Hit</td></tr>
-    <tr><td class="c">12–16</td><td class="c"><strong>Stand</strong></td><td class="c">Hit</td></tr>
-    <tr><td class="c">17+</td><td class="c">Stand</td><td class="c">Stand</td></tr>
-    <tr><td class="c">A,A</td><td class="c">Split</td><td class="c">Split</td></tr>
-    <tr><td class="c">8,8</td><td class="c">Split</td><td class="c">Split</td></tr>
-    <tr><td class="c">10,10</td><td class="c">Stand</td><td class="c">Stand</td></tr>
+    <tr><td class="c">8 or less</td><td class="act act-h">Hit</td><td class="act act-h">Hit</td></tr>
+    <tr><td class="c">9–11</td><td class="act act-d">Double Down</td><td class="act act-h">Hit</td></tr>
+    <tr><td class="c">12–16</td><td class="act act-s">Stand</td><td class="act act-h">Hit</td></tr>
+    <tr><td class="c">17+</td><td class="act act-s">Stand</td><td class="act act-s">Stand</td></tr>
+    <tr><td class="c">A,A</td><td class="act act-p">Split</td><td class="act act-p">Split</td></tr>
+    <tr><td class="c">8,8</td><td class="act act-p">Split</td><td class="act act-p">Split</td></tr>
+    <tr><td class="c">10,10</td><td class="act act-s">Stand</td><td class="act act-s">Stand</td></tr>
   </table>
   <div class="note">🎯 <strong>The golden rule:</strong> assume the dealer's hole card is a 10.</div>
 
@@ -933,19 +1133,18 @@ Player A:  [Q♥]  vs  Player B:  [Q♣]   →  WAR! ⚔️
   <p class="goal">Make the best <em>5‑card hand</em> — or bluff everyone else into folding.</p>
 
   <h3>Hand Rankings — best to worst</h3>
-  <table>
-    <tr><th class="c">#</th><th>Hand</th><th>Example</th></tr>
-    <tr><td class="c">1</td><td>👑 <strong>Royal Flush</strong></td><td>10‑J‑Q‑K‑A all same suit</td></tr>
-    <tr><td class="c">2</td><td>🌊 <strong>Straight Flush</strong></td><td>5 in a row, same suit</td></tr>
-    <tr><td class="c">3</td><td>🎰 <strong>Four of a Kind</strong></td><td>4× same rank</td></tr>
-    <tr><td class="c">4</td><td>🏠 <strong>Full House</strong></td><td>3 of a kind + a pair</td></tr>
-    <tr><td class="c">5</td><td>💧 <strong>Flush</strong></td><td>5 cards same suit</td></tr>
-    <tr><td class="c">6</td><td>📏 <strong>Straight</strong></td><td>5 in a row, mixed suits</td></tr>
-    <tr><td class="c">7</td><td>🎯 <strong>Three of a Kind</strong></td><td>3× same rank</td></tr>
-    <tr><td class="c">8</td><td>✌️✌️ <strong>Two Pair</strong></td><td>Two different pairs</td></tr>
-    <tr><td class="c">9</td><td>✌️ <strong>One Pair</strong></td><td>2× same rank</td></tr>
-    <tr><td class="c">10</td><td>🔝 <strong>High Card</strong></td><td>Highest single card</td></tr>
-  </table>
+  <div class="rankgrid">
+    <div class="rankrow"><div class="num">1</div><div class="info"><div class="nm">👑 Royal Flush</div><div class="ds">10‑J‑Q‑K‑A, all same suit</div></div><div class="cs"><span class="pc sm"><b>10</b><i>♠</i></span><span class="pc sm"><b>J</b><i>♠</i></span><span class="pc sm"><b>Q</b><i>♠</i></span><span class="pc sm"><b>K</b><i>♠</i></span><span class="pc sm"><b>A</b><i>♠</i></span></div></div>
+    <div class="rankrow"><div class="num">2</div><div class="info"><div class="nm">🌊 Straight Flush</div><div class="ds">5 in a row, same suit</div></div><div class="cs"><span class="pc sm red"><b>5</b><i>♥</i></span><span class="pc sm red"><b>6</b><i>♥</i></span><span class="pc sm red"><b>7</b><i>♥</i></span><span class="pc sm red"><b>8</b><i>♥</i></span><span class="pc sm red"><b>9</b><i>♥</i></span></div></div>
+    <div class="rankrow"><div class="num">3</div><div class="info"><div class="nm">🎰 Four of a Kind</div><div class="ds">4× same rank</div></div><div class="cs"><span class="pc sm"><b>9</b><i>♠</i></span><span class="pc sm red"><b>9</b><i>♥</i></span><span class="pc sm red"><b>9</b><i>♦</i></span><span class="pc sm"><b>9</b><i>♣</i></span><span class="pc sm red fade"><b>K</b><i>♦</i></span></div></div>
+    <div class="rankrow"><div class="num">4</div><div class="info"><div class="nm">🏠 Full House</div><div class="ds">3 of a kind + a pair</div></div><div class="cs"><span class="pc sm"><b>J</b><i>♠</i></span><span class="pc sm red"><b>J</b><i>♥</i></span><span class="pc sm red"><b>J</b><i>♦</i></span><span class="pc sm"><b>4</b><i>♣</i></span><span class="pc sm red"><b>4</b><i>♦</i></span></div></div>
+    <div class="rankrow"><div class="num">5</div><div class="info"><div class="nm">💧 Flush</div><div class="ds">5 cards, same suit</div></div><div class="cs"><span class="pc sm red"><b>A</b><i>♦</i></span><span class="pc sm red"><b>J</b><i>♦</i></span><span class="pc sm red"><b>8</b><i>♦</i></span><span class="pc sm red"><b>6</b><i>♦</i></span><span class="pc sm red"><b>2</b><i>♦</i></span></div></div>
+    <div class="rankrow"><div class="num">6</div><div class="info"><div class="nm">📏 Straight</div><div class="ds">5 in a row, mixed suits</div></div><div class="cs"><span class="pc sm"><b>4</b><i>♣</i></span><span class="pc sm red"><b>5</b><i>♦</i></span><span class="pc sm"><b>6</b><i>♠</i></span><span class="pc sm red"><b>7</b><i>♥</i></span><span class="pc sm"><b>8</b><i>♣</i></span></div></div>
+    <div class="rankrow"><div class="num">7</div><div class="info"><div class="nm">🎯 Three of a Kind</div><div class="ds">3× same rank</div></div><div class="cs"><span class="pc sm"><b>Q</b><i>♠</i></span><span class="pc sm red"><b>Q</b><i>♥</i></span><span class="pc sm"><b>Q</b><i>♣</i></span><span class="pc sm red fade"><b>9</b><i>♦</i></span><span class="pc sm fade"><b>2</b><i>♠</i></span></div></div>
+    <div class="rankrow"><div class="num">8</div><div class="info"><div class="nm">✌️✌️ Two Pair</div><div class="ds">Two different pairs</div></div><div class="cs"><span class="pc sm"><b>K</b><i>♠</i></span><span class="pc sm red"><b>K</b><i>♥</i></span><span class="pc sm red"><b>7</b><i>♦</i></span><span class="pc sm"><b>7</b><i>♣</i></span><span class="pc sm fade"><b>3</b><i>♠</i></span></div></div>
+    <div class="rankrow"><div class="num">9</div><div class="info"><div class="nm">✌️ One Pair</div><div class="ds">2× same rank</div></div><div class="cs"><span class="pc sm"><b>10</b><i>♠</i></span><span class="pc sm red"><b>10</b><i>♥</i></span><span class="pc sm red fade"><b>A</b><i>♦</i></span><span class="pc sm fade"><b>6</b><i>♣</i></span><span class="pc sm red fade"><b>2</b><i>♥</i></span></div></div>
+    <div class="rankrow"><div class="num">10</div><div class="info"><div class="nm">🔝 High Card</div><div class="ds">Highest single card</div></div><div class="cs"><span class="pc sm"><b>A</b><i>♠</i></span><span class="pc sm red fade"><b>J</b><i>♥</i></span><span class="pc sm fade"><b>8</b><i>♣</i></span><span class="pc sm red fade"><b>5</b><i>♦</i></span><span class="pc sm fade"><b>2</b><i>♠</i></span></div></div>
+  </div>
   <div class="note">🃏 Ties are broken by <strong>kickers</strong> (next highest card).</div>
 
   <h3>Setup</h3>
@@ -966,10 +1165,19 @@ Player A:  [Q♥]  vs  Player B:  [Q♣]   →  WAR! ⚔️
 
   <h3>The Showdown</h3>
   <p>If 2+ players remain, they reveal cards. <strong>Best 5‑card hand</strong> (made from any combination of the 2 hole + 5 community cards) wins the pot. If only one player remains (everyone else folded), they win — and don't have to show their cards.</p>
-  <pre class="cards-art">Your hole cards:      [A♠] [K♠]
-Community cards:  [Q♠][J♠][10♠][3♦][7♣]
-                  └─────────────────┘
-Your best 5 cards:  A♠ K♠ Q♠ J♠ 10♠  = ROYAL FLUSH 👑</pre>
+  <div class="hand" aria-label="Your hole cards: ace and king of spades">
+    <span class="pc"><b>A</b><i>♠</i></span>
+    <span class="pc"><b>K</b><i>♠</i></span>
+    <span class="cap">Your hole cards</span>
+  </div>
+  <div class="hand" aria-label="Community cards: queen, jack, and 10 of spades plus 3 of diamonds and 7 of clubs">
+    <span class="pc"><b>Q</b><i>♠</i></span>
+    <span class="pc"><b>J</b><i>♠</i></span>
+    <span class="pc"><b>10</b><i>♠</i></span>
+    <span class="pc red fade"><b>3</b><i>♦</i></span>
+    <span class="pc fade"><b>7</b><i>♣</i></span>
+    <span class="cap">Community cards — best 5 of all 7: A♠ K♠ Q♠ J♠ 10♠ = Royal Flush 👑</span>
+  </div>
 
   <h3>Starting Hand Strength — rough guide</h3>
   <table style="max-width:560px">
@@ -1031,12 +1239,12 @@ Your best 5 cards:  A♠ K♠ Q♠ J♠ 10♠  = ROYAL FLUSH 👑</pre>
 
 <div class="flatcard">
   <h2>🃏 The Deck — Know Your Cards</h2>
-  <pre class="cards-art">┌─────┐  ┌─────┐  ┌─────┐  ┌─────┐
-│A ♠  │  │A ♥  │  │A ♦  │  │A ♣  │
-│     │  │     │  │     │  │     │
-│  ♠ A│  │  ♥ A│  │  ♦ A│  │  ♣ A│
-└─────┘  └─────┘  └─────┘  └─────┘
-Spades   Hearts   Diamonds  Clubs</pre>
+  <div class="piles" aria-label="The four suits: spades, hearts, diamonds, clubs">
+    <div class="pile"><span class="pc"><b>A</b><i>♠</i></span><div class="pl">Spades</div></div>
+    <div class="pile"><span class="pc red"><b>A</b><i>♥</i></span><div class="pl">Hearts</div></div>
+    <div class="pile"><span class="pc red"><b>A</b><i>♦</i></span><div class="pl">Diamonds</div></div>
+    <div class="pile"><span class="pc"><b>A</b><i>♣</i></span><div class="pl">Clubs</div></div>
+  </div>
   <p>A standard deck has <strong>52 cards</strong> in 4 suits of 13 ranks each:</p>
   <p><span class="card-chip">2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10 → J → Q → K → A</span></p>
   <p style="margin-top:10px">Most games rank Ace <strong>high</strong>, but some rank it <strong>low</strong> or <strong>either</strong>. Each game's section will tell you.</p>
@@ -1056,6 +1264,35 @@ Spades   Hearts   Diamonds  Clubs</pre>
   Happy playing! 🎉 &nbsp;·&nbsp; MIT licensed — use these rules anywhere, for anything.<br>
   From <a href="https://github.com/CristianPGit/card-games-rules">CristianPGit/card-games-rules</a> on GitHub. Found a mistake or know a variant? Fork the repo and open a pull request.
 </footer>
+
+<script>
+(function(){
+  var state={players:'any',diff:'any'};
+  var cards=document.querySelectorAll('.gcard');
+  function apply(){
+    cards.forEach(function(c){
+      var ok=true;
+      if(state.players!=='any'){
+        var n=+state.players,min=+c.dataset.min,max=+c.dataset.max;
+        ok=(n>=min&&n<=max)||(n===6&&max>=6);
+      }
+      if(ok&&state.diff!=='any')ok=c.dataset.diff===state.diff;
+      c.classList.toggle('off',!ok);
+      c.setAttribute('aria-hidden',ok?'false':'true');
+      c.tabIndex=ok?0:-1;
+    });
+  }
+  document.querySelectorAll('.fgroup').forEach(function(group){
+    group.addEventListener('click',function(e){
+      var btn=e.target.closest('button');
+      if(!btn)return;
+      group.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',b===btn?'true':'false');});
+      state[group.dataset.filter]=btn.dataset.val;
+      apply();
+    });
+  });
+})();
+</script>
 
 </body>
 </html>

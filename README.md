@@ -15,6 +15,12 @@
 ![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
 ![Made with](https://img.shields.io/badge/made%20with-❤️-pink?style=for-the-badge)
 
+<br>
+
+### 🌐 **[Browse the rules as a website →](https://cristianpgit.github.io/card-games-rules/)**
+
+*Rendered playing cards, a game finder, and every rule sheet on one page.*
+
 </div>
 
 ---
@@ -26,6 +32,7 @@ Welcome to **Card Games Rules** — a curated collection of rule sheets for clas
 - 🎯 **Quick-start summary** — get playing in 60 seconds
 - 👥 **Player count, deck, and difficulty** at a glance
 - 📜 **Step-by-step rules** with examples
+- 🔄 **Turn-flow diagrams** so you can see how a round plays out
 - 💡 **Strategy tips** to actually win
 - ⚠️ **Common mistakes** to avoid
 

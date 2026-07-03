@@ -50,6 +50,23 @@ Play moves clockwise. On your turn, play **a card equal to or higher than** the 
 - Can't play? **Pick up the entire discard pile** into your hand. 😱
 - Once the draw pile is empty, play through your face-up row, then face-down row (you flip these blind!).
 
+### 🔄 Turn Flow
+
+```mermaid
+flowchart TD
+    A([Your turn]) --> B{Can you play equal or higher<br>than the pile top — or a magic card?}
+    B -- Yes --> C[Play it]
+    B -- No --> D["Pick up the ENTIRE pile 😱"]
+    C --> E{Draw pile has cards?}
+    E -- Yes --> F[Draw back up to 3 in hand]
+    E -- No --> G[Play from face-up row,<br>then face-down row — blind! 🙈]
+    F --> H([Next player])
+    D --> H
+    G --> I{All your cards gone?}
+    I -- Yes --> J([😎 You're safe!])
+    I -- No --> H
+```
+
 ---
 
 ## ⚡ Magic Cards
